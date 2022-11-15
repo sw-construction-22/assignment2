@@ -1,18 +1,22 @@
 package Materials.Dice;
 public class Dice {
-    private final int MAX = 6;  // maximum face value
+    private final int MAX = 6;
 
-    private int value;  // current value showing on the die
+    private int value;
 
-    public Dice() {value = roll();}
+    public Dice() {}
 
     /**
      * Rolle the dice
      * @return rolled dice value
      */
-    private int roll()
+    public int roll()
     {
         value = (int)(Math.random() * MAX) + 1;
+        return value;
+    }
+
+    public int getValue(){
         return value;
     }
 
