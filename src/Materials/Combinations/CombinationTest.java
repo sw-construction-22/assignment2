@@ -1,5 +1,9 @@
-package testing;
+package Materials.Combinations;
 
+import Game.GameState;
+import Game.NormalState;
+import Game.NullState;
+import Game.TuttoState;
 import Materials.Combinations.Combination;
 import Materials.Dice.Dice;
 import org.junit.jupiter.api.Assertions;
@@ -37,15 +41,15 @@ public class CombinationTest {
     @Test
     public void testEvaluateRoll(){
         Combination c = new Combination();
-        assertTrue(c.evaluateRoll(SIXER));
-        assertTrue(c.evaluateRoll(ONES_AND_FIVES));
-        assertTrue(c.evaluateRoll(NO_TRIPPLETS_BUT_ONES));
-        assertTrue(c.evaluateRoll(FULL_TRIPPLE));
-        assertTrue(c.evaluateRoll(FULL_TRIPPLE_ONE));
-        assertTrue(c.evaluateRoll(REDUCED_SET_TRIPPLES));
-        assertTrue(c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES));
-        assertTrue(c.evaluateRoll(STRAIGHT));
-        assertFalse(c.evaluateRoll(NULL));
+        assertEquals(c.evaluateRoll(SIXER), new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)));
+        assertEquals(c.evaluateRoll(ONES_AND_FIVES), new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)));
+        assertEquals(c.evaluateRoll(NO_TRIPPLETS_BUT_ONES), new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)));
+        assertEquals(c.evaluateRoll(FULL_TRIPPLE),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)));
+        assertEquals(c.evaluateRoll(FULL_TRIPPLE_ONE),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.TRIPPLE_ONE)));
+        assertEquals(c.evaluateRoll(REDUCED_SET_TRIPPLES),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)));
+        assertEquals(c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE)));
+        assertEquals(c.evaluateRoll(STRAIGHT),  new ArrayList<>(Arrays.asList(DicePattern.STRAIGHT)));
+        assertEquals(c.evaluateRoll(NULL), new ArrayList<>());
         assertThrows(AssertionError.class, () -> {
             c.evaluateRoll(EMPTY);
         });
@@ -53,4 +57,21 @@ public class CombinationTest {
             c.evaluateRoll(TOO_BIG);
         });
     }
+
+    @Test
+    public void testEvaluateState(){
+        Combination c = new Combination();
+        c.evaluateRoll(FULL_TRIPPLE);
+        assertEquals(c.evaluateState(FULL_TRIPPLE.size()), TuttoState.state());
+        c.evaluateRoll(SIXER);
+        assertEquals(c.evaluateState(SIXER.size()), TuttoState.state());
+        c.evaluateRoll(NULL);
+        assertEquals(c.evaluateState(NULL.size()), NullState.state());
+        c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES);
+        assertEquals(c.evaluateState(REDUCED_SET_TRIPPLES_AND_ONES.size()), TuttoState.state());
+        c.evaluateRoll(NO_TRIPPLETS_BUT_ONES);
+        assertEquals(c.evaluateState(NO_TRIPPLETS_BUT_ONES.size()), NormalState.state());
+    }
+
+
 }
