@@ -1,4 +1,4 @@
-package Materials.CardV2;
+package Materials.Card;
 
 public class StopCard extends Card implements CardRule{
 

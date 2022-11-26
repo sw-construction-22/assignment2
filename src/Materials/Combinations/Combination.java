@@ -17,20 +17,24 @@ public class Combination {
      */
     public boolean evaluateRoll(List<Dice> thrownDices /* GAME STATE IS REQUIRED AS WELL */){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6;
+        List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
         dicesForPattern = new ArrayList<>();
         foundPatterns = new ArrayList<>();
         // sort values
-        Collections.sort(thrownDices);
+        Collections.sort(thrownDiceCopy);
         //iterate through patterns
         for (DicePattern pattern : DicePattern.values()){
             // slice list to check if it matches with a subset
-            for(int subSetStart = 0; subSetStart <= (thrownDices.size() - pattern.getRequiredPattern().size()); subSetStart++){
-                List<Dice> patternCheck = thrownDices.subList(subSetStart, subSetStart+pattern.getRequiredPattern().size());
+            for(int subSetStart = 0; subSetStart <= (thrownDiceCopy.size() - pattern.getRequiredPattern().size()); subSetStart++){
+                List<Dice> patternCheck = thrownDiceCopy.subList(subSetStart, subSetStart+pattern.getRequiredPattern().size());
                 // check if pattern exists in list
                 if (patternCheck.equals(pattern.getRequiredPattern())){
+                    subSetStart -= 1;
                     dicesForPattern.addAll(patternCheck);
                     foundPatterns.add(pattern);
-                    thrownDices.removeAll(patternCheck);
+                    for(Dice current : pattern.getRequiredPattern()){
+                        thrownDiceCopy.remove(current);
+                    }
                 }
             }
         }

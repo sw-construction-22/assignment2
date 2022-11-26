@@ -1,4 +1,4 @@
-package Materials.CardV2;
+package Materials.Card;
 
 public class Main_T {
     public static void main(String[] args){

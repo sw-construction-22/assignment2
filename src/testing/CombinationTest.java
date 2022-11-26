@@ -25,6 +25,7 @@ public class CombinationTest {
     private final List<Dice> SIXER =                            new ArrayList<>(Arrays.asList( new Dice(6),  new Dice(6),  new Dice(6)));
     private final List<Dice> NULL =                             new ArrayList<>(Arrays.asList( new Dice(2), new Dice(2), new Dice(3), new Dice(4), new Dice(6), new Dice(6)));
     private final List<Dice> ONES_AND_FIVES =                   new ArrayList<>(Arrays.asList( new Dice(1), new Dice(5), new Dice(2), new Dice(1), new Dice(2), new Dice(6)));
+    private final List<Dice> ONES_AND_FIVES_2 =                   new ArrayList<>(Arrays.asList( new Dice(1), new Dice(1), new Dice(3), new Dice(4), new Dice(5), new Dice(5)));
     private final List<Dice> NO_TRIPPLETS_BUT_ONES =            new ArrayList<>(Arrays.asList( new Dice(1), new Dice(2), new Dice(1), new Dice(4), new Dice(4), new Dice(6)));
     private final List<Dice> FULL_TRIPPLE =                     new ArrayList<>(Arrays.asList( new Dice(2), new Dice(2), new Dice(2), new Dice(2), new Dice(2), new Dice(2)));
     private final List<Dice> FULL_TRIPPLE_ONE =                 new ArrayList<>(Arrays.asList( new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)));
@@ -39,6 +40,7 @@ public class CombinationTest {
         Combination c = new Combination();
         assertTrue(c.evaluateRoll(SIXER));
         assertTrue(c.evaluateRoll(ONES_AND_FIVES));
+        assertTrue(c.evaluateRoll(ONES_AND_FIVES_2));
         assertTrue(c.evaluateRoll(NO_TRIPPLETS_BUT_ONES));
         assertTrue(c.evaluateRoll(FULL_TRIPPLE));
         assertTrue(c.evaluateRoll(FULL_TRIPPLE_ONE));
