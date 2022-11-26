@@ -12,6 +12,7 @@ public class DiceRoll {
             aDice[x]= die.getValue(); // sets the dice values
         }
 
+
         System.out.println("Die 1: " + aDice[0]);
         System.out.println("Die 2: " + aDice[1]);
         System.out.println("Die 3: " + aDice[2]);

@@ -8,6 +8,7 @@ public class Player {
      if (Player_decision.equalsIgnoreCase("yes") {
      // return GameState.Continue;
      }
+
      else if (Player_decision.equalsIgnoreCase("no")) {
      // return GameState.End;
      }
