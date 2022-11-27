@@ -55,6 +55,20 @@ public class Combination {
         return foundPatterns;
     }
 
+
+    /**
+     * 6 dice
+     *  => some combination
+     *
+     *
+     * 1 card
+     *  => some event / rule
+     *
+     * @param numberOfThrownDice
+     * @return
+     */
+
+
     protected GameState evaluateState(int numberOfThrownDice){
         if (numberOfThrownDice == dicesForPattern.size()){
             return TuttoState.state();
