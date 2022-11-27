@@ -33,6 +33,7 @@ public class GameOperator {
 
             for(Player p : players){
                 Card card = p.draw(deck);
+                System.out.println("Card drawn: " + card.getCardType());
                 if(card.getCardType() != CardType.STOP /*&&
                         card.getCardType() != CardType.CLOVERLEAF &&
                         card.getCardType() != CardType.PLUSMINUS*/) {
@@ -52,10 +53,6 @@ public class GameOperator {
     }
     public List<Player> getGameLeader(){
         Comparator<Player> byScore = Comparator.comparing(Player::getScore);
-        players.get(1).addTemporary(10);
-        players.get(1).addScore();
-        players.get(2).addTemporary(10);
-        players.get(2).addScore();
         Collections.sort(players, byScore);
         Collections.reverse(players); //highest player on top
         List<Player> leaders = new ArrayList<>();
