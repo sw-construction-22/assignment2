@@ -16,6 +16,7 @@ public class Combination {
     private List<Dice> dicesForPattern;
     private List<DicePattern> foundPatterns;
 
+    private final int hi = 10;
 
 
     public void evaluate(List<Dice> thrownDices){
