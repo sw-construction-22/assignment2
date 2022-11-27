@@ -29,63 +29,18 @@ public class CombinationTest {
     @Test
     public void testBonus200CardCombinations(){
         Deck bonus200CardDeck = new Deck(CardType.BONUSx200);
-        Card card = bonus200CardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
-        assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        regularCardPatternTest(bonus200CardDeck);
     }
 
     @Test
     public void testBonus300CardCombinations(){
         Deck bonus300CardDeck = new Deck(CardType.BONUSx300);
-        Card card = bonus300CardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
-        assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        regularCardPatternTest(bonus300CardDeck);
     }
     @Test
     public void testCloverleafCardCombinations(){
         Deck cloverleafCardDeck = new Deck(CardType.CLOVERLEAF);
-        Card card = cloverleafCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
-        assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        regularCardPatternTest(cloverleafCardDeck);
     }
     @Test
     public void testStraightCardCombinations(){
@@ -98,81 +53,48 @@ public class CombinationTest {
         assertEquals(new ArrayList<>(), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
         assertEquals(new ArrayList<>(), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
         assertEquals(new ArrayList<>(), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.STRAIGHT)), c.evaluateRoll(STRAIGHT, card.getCardType()));
+        assertEquals(new ArrayList<>(List.of(DicePattern.STRAIGHT)), c.evaluateRoll(STRAIGHT, card.getCardType()));
         assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        assertThrows(AssertionError.class, () -> c.evaluateRoll(EMPTY, card.getCardType()));
+        assertThrows(AssertionError.class, () -> c.evaluateRoll(TOO_BIG, card.getCardType()));
     }
     @Test
     public void testDoubleCardCombinations(){
         Deck doubleCardDeck = new Deck(CardType.X2);
+        regularCardPatternTest(doubleCardDeck);
+    }
+
+    private void regularCardPatternTest(Deck doubleCardDeck) {
         Card card = doubleCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
+        assertEquals(new ArrayList<>(List.of(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
+        assertEquals(new ArrayList<>(List.of(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
         assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        assertThrows(AssertionError.class, () -> c.evaluateRoll(EMPTY, card.getCardType()));
+        assertThrows(AssertionError.class, () -> c.evaluateRoll(TOO_BIG, card.getCardType()));
     }
+
     @Test
     public void testPlusMinusCardCombinations(){
         Deck plusMinusCardDeck = new Deck(CardType.PLUSMINUS);
-        Card card = plusMinusCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
-        assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        regularCardPatternTest(plusMinusCardDeck);
     }
     @Test
     public void testFireworksCardCombinations(){
         Deck fireworksCardDeck = new Deck(CardType.FIREWORKS);
-        Card card = fireworksCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(NO_TRIPPLETS_BUT_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)), c.evaluateRoll(FULL_TRIPPLE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(FULL_TRIPPLE_ONE, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO)), c.evaluateRoll(REDUCED_SET_TRIPPLES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)), c.evaluateRoll(REDUCED_SET_TRIPPLES_AND_ONES, card.getCardType()));
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(STRAIGHT, card.getCardType()));
-        assertEquals(new ArrayList<>(), c.evaluateRoll(NULL, card.getCardType()));
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(EMPTY, card.getCardType());
-        });
-        assertThrows(AssertionError.class, () -> {
-            c.evaluateRoll(TOO_BIG, card.getCardType());
-        });
+        regularCardPatternTest(fireworksCardDeck);
     }
 
     @Test
     public void testMaxDiceValueFromCombinations(){
         Deck fireworksCardDeck = new Deck(CardType.FIREWORKS);
         Card card = fireworksCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
+        assertEquals(new ArrayList<>(List.of(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
         assertEquals(600, c.dicePatternMaxPoints());
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
         assertEquals(250, c.dicePatternMaxPoints());
@@ -183,7 +105,7 @@ public class CombinationTest {
     public void testPatternDiceSizeFromCombinations(){
         Deck fireworksCardDeck = new Deck(CardType.FIREWORKS);
         Card card = fireworksCardDeck.draw();
-        assertEquals(new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
+        assertEquals(new ArrayList<>(List.of(DicePattern.TRIPPLE_SIX)), c.evaluateRoll(SIXER, card.getCardType()));
         assertEquals(3, c.dicePatternSize());
         assertEquals(new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)), c.evaluateRoll(ONES_AND_FIVES, card.getCardType()));
         assertEquals(3, c.dicePatternSize());

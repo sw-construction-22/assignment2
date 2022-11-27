@@ -80,7 +80,7 @@ public class Deck implements Iterable<Card> {
      * Draws a card from the deck: removes the card from the top
      * of the deck and returns it.
      * @return The card drawn.
-     * @pre !isEmpty()
+     * precondition !isEmpty()
      */
     public Card draw()
     {
