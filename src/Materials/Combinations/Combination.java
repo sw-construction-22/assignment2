@@ -49,6 +49,11 @@ public class Combination {
                     foundPatterns.add(pattern);
                     for(Dice current : pattern.getRequiredPattern()){
                         thrownDiceCopy.remove(current);
+                        if(pattern.equals(DicePattern.TRIPPLE_ONE)){
+                            foundPatterns.add(DicePattern.SINGLE_ONE);
+                        } else if (pattern.equals(DicePattern.TRIPPLE_FIVE)){
+                            foundPatterns.add(DicePattern.SINGLE_FIVE);
+                        }
                     }
                 }
             }
@@ -107,8 +112,22 @@ public class Combination {
 
     public int dicePatternSize() {
         int i = 0;
+        int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
+        int tripple1 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_ONE);
+        i = i - ((tripple1*3) + (tripple5 * 3));
         for (DicePattern p : foundPatterns){
             i += p.getRequiredPattern().size();
+        }
+        return i;
+    }
+
+    public int dicePatternMaxPoints() {
+        int i = 0;
+        int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
+        int tripple1 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_ONE);
+        i = i - ((tripple1*3 * DicePattern.SINGLE_ONE.getValue()) + (tripple5 * 3 * DicePattern.SINGLE_FIVE.getValue()));
+        for (DicePattern p : foundPatterns){
+            i += p.getValue();
         }
         return i;
     }

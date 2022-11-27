@@ -24,7 +24,7 @@ public class CloverleafCard extends Card implements CardRule {
      */
     @Override
     public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute Cloverleaf Card function");
+        System.out.println("\n\nExecute Cloverleaf Card function");
         // throw dice
         // accept 2 tutto only and win
         int tuttoScore = 0;
@@ -42,15 +42,11 @@ public class CloverleafCard extends Card implements CardRule {
                     // GIVE BACK ALL DICE
                 } else {
                     // HOLD BACK DICE
-                    List<DicePattern> founds = c.getFoundPatterns();
-                    for (DicePattern p : founds) {
-                        System.out.println("\n" + p.toString());
-                        for (Dice d : p.getRequiredPattern()) {
-                            dice.remove(d);
-                            System.out.print("removed ");
-                            System.out.print(d.getValue() + ", ");
-                        }
+                    int index = 1;
+                    for(DicePattern pattern : c.getFoundPatterns()){
+                        System.out.println(index++ + " " + pattern.toString());
                     }
+                    dice = player.holdBack(c.getFoundPatterns(), dice);
                 }
             } else {
                 // NULL

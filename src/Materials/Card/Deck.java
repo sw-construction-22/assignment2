@@ -34,15 +34,15 @@ public class Deck implements Iterable<Card> {
                 } else if (cardType.equals(CardType.CLOVERLEAF)){
                     cards.add(new CloverleafCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx200)){
-                    cards.add(new Bonusx200Card(cardType));
+                    cards.add(new BonusCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx300)){
-                    cards.add(new Bonusx300Card(cardType));
+                    cards.add(new BonusCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx400)){
-                    cards.add(new Bonusx400Card(cardType));
+                    cards.add(new BonusCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx500)){
-                    cards.add(new Bonusx500Card(cardType));
+                    cards.add(new BonusCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx600)){
-                    cards.add(new Bonusx600Card(cardType));
+                    cards.add(new BonusCard(cardType));
                 } /*else if (cardType.equals(CardType.X2)){
                     cards.add(new DoubleCard(cardType));
                 } */else if (cardType.equals(CardType.PLUSMINUS)){

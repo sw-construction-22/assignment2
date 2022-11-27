@@ -18,12 +18,12 @@ public class FireworksCard extends Card implements CardRule {
 
     @Override
     public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute Fireworks card");
+        System.out.println("\n\nExecute Fireworks card");
         // throw dice
         // accept 2 tutto only and win
         Combination c = new Combination();
         while (true) {
-            System.out.println("\nRun turn");
+            System.out.println("Run turn");
             player.roll(dice);
             if (c.evaluateRoll(dice).size() > 0) {
                 // PATTERN FOUND (VALID)
@@ -35,13 +35,12 @@ public class FireworksCard extends Card implements CardRule {
                 } else {
                     // HOLD BACK DICE
                     List<DicePattern> founds = c.getFoundPatterns();
+                    System.out.println("Removing all the valid patterns from the dice: ");
                     for (DicePattern p : founds) {
                         player.addTemporary(p.getValue());
-                        System.out.println("\n" + p.toString());
+                        System.out.println(" - " + p.toString());
                         for (Dice d : p.getRequiredPattern()) {
                             dice.remove(d);
-                            System.out.print("removed ");
-                            System.out.print(d.getValue() + ", ");
                         }
                     }
                 }

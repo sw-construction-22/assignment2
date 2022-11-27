@@ -7,19 +7,20 @@ import Player.Player;
 
 import java.util.List;
 
-public class Bonusx400Card extends Card implements CardRule {
+public class BonusCard  extends Card implements CardRule {
 
-    protected Bonusx400Card(CardType cardType){
+    protected BonusCard(CardType cardType){
         assert cardType != null;
         super.cardType = cardType;
     }
 
     @Override
     public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute 400 Bonus card");
+        System.out.println("\n\nExecute " + cardType +" Bonus card");
         // throw dice
         // accept 2 tutto only and win
         int tuttoScore = 0;
+        player.turnStart();
         Combination c = new Combination();
         while (tuttoScore < 1) {
             System.out.println("\nRun turn");
@@ -32,19 +33,19 @@ public class Bonusx400Card extends Card implements CardRule {
                     player.addTemporary(this.getCardType().getPoints());
                     // TUTTO SCORED
                     // GIVE BACK ALL DICE
-                    // DRAW NEW CARD
                 } else {
                     // HOLD BACK DICE
-                    // ADD temporary score
-                    List<DicePattern> founds = c.getFoundPatterns();
-                    for (DicePattern p : founds) {
-                        player.addTemporary(p.getValue());
-                        System.out.println("\n" + p.toString());
-                        for (Dice d : p.getRequiredPattern()) {
-                            dice.remove(d);
-                            System.out.print("removed ");
-                            System.out.print(d.getValue() + ", ");
-                        }
+                    System.out.println("Current max points from roll: " + c.dicePatternMaxPoints());
+                    int index = 1;
+                    for(DicePattern pattern : c.getFoundPatterns()){
+                        System.out.println(index++ + " " + pattern.toString());
+                    }
+                    if (player.reroll()){
+                        dice = player.holdBack(c.getFoundPatterns(), dice);
+                    } else {
+                        player.addTemporary(c.dicePatternMaxPoints());
+                        player.addScore();
+                        break;
                     }
                 }
             } else {
