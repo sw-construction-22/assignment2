@@ -1,5 +1,6 @@
 package Materials.Card;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -8,12 +9,11 @@ import java.util.List;
 /**
  * Represents a deck of playing cards that can be inherited.
  */
-public class Deck implements CardSource, Iterable<Card>
-{
-    private CardStack aCards = new CardStack();
+public class Deck implements Iterable<Card> {
+    private List<Card> cards = new ArrayList<>();
 
     /**
-     * Creates a new deck of 52 cards, shuffled.
+     * Creates a new deck of cards, shuffled.
      */
     public Deck()
     {
@@ -21,7 +21,7 @@ public class Deck implements CardSource, Iterable<Card>
     }
 
     /**
-     * Reinitializes the deck with all 52 cards, and shuffles them.
+     * Reinitializes the deck with all cards, and shuffles them.
      */
     public void shuffle()
     {
@@ -29,11 +29,33 @@ public class Deck implements CardSource, Iterable<Card>
         for( CardType cardType : CardType.values() )
         {
             for (int amount = 0; amount < cardType.getNumberOfCards(); amount++){
-                cards.add(Card.get(cardType));
+                if (cardType.equals(CardType.STOP)){
+                    cards.add(new StopCard(cardType));
+                } else if (cardType.equals(CardType.CLOVERLEAF)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.BONUSx200)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.BONUSx300)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.BONUSx400)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.BONUSx500)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.BONUSx600)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.X2)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.PLUSMINUS)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.FIREWORKS)){
+                    cards.add(new CloverleafCard(cardType));
+                } else if (cardType.equals(CardType.STRAIGHT)){
+                    cards.add(new CloverleafCard(cardType));
+                }
             }
         }
         Collections.shuffle(cards);
-        aCards = new CardStack(cards);
+        this.cards = cards;
     }
 
     /**
@@ -45,7 +67,7 @@ public class Deck implements CardSource, Iterable<Card>
     public Card draw()
     {
         assert !isEmpty();
-        return aCards.pop();
+        return cards.remove(cards.size()-1);//last value
     }
 
     /**
@@ -53,12 +75,12 @@ public class Deck implements CardSource, Iterable<Card>
      */
     public boolean isEmpty()
     {
-        return aCards.isEmpty();
+        return cards.isEmpty();
     }
 
     @Override
     public Iterator<Card> iterator()
     {
-        return aCards.iterator();
+        return cards.iterator();
     }
 }

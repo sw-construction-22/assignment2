@@ -27,4 +27,8 @@ public enum DicePattern {
         return new ArrayList<>(requiredPattern);
     }
     public int getValue(){return this.value;};
+
+    public String toString(){
+        return this.name();
+    }
 }

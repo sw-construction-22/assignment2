@@ -1,8 +1,9 @@
-import Materials.Card.Deck;
+package Materials.Card;
 
-public class Main {
+public class Main_T {
     public static void main(String[] args){
         Deck d = new Deck();
+        d.shuffle();
         d.draw().executeRule();
         d.isEmpty();
     }
