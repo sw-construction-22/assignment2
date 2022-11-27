@@ -5,8 +5,6 @@ import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Bonusx200Card extends Card implements CardRule {
