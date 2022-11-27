@@ -20,6 +20,19 @@ public class Deck implements Iterable<Card> {
         shuffle();
     }
 
+    public Deck(CardType type)
+    {
+        shuffle(type);
+    }
+
+    public void shuffle(CardType type){
+        List<Card> cards = new ArrayList<>();
+        for (int amount = 0; amount < type.getNumberOfCards(); amount++){
+            cards.addAll(instantiateCards(cards, type));
+        }
+        Collections.shuffle(cards);
+        this.cards = cards;
+    }
     /**
      * Reinitializes the deck with all cards, and shuffles them.
      */
@@ -29,35 +42,38 @@ public class Deck implements Iterable<Card> {
         for( CardType cardType : CardType.values() )
         {
             for (int amount = 0; amount < cardType.getNumberOfCards(); amount++){
-                if (cardType.equals(CardType.STOP)){
-                    cards.add(new StopCard(cardType));
-                } else if (cardType.equals(CardType.CLOVERLEAF)){
-                    cards.add(new CloverleafCard(cardType));
-                } else if (cardType.equals(CardType.BONUSx200)){
-                    cards.add(new BonusCard(cardType));
-                } else if (cardType.equals(CardType.BONUSx300)){
-                    cards.add(new BonusCard(cardType));
-                } else if (cardType.equals(CardType.BONUSx400)){
-                    cards.add(new BonusCard(cardType));
-                } else if (cardType.equals(CardType.BONUSx500)){
-                    cards.add(new BonusCard(cardType));
-                } else if (cardType.equals(CardType.BONUSx600)){
-                    cards.add(new BonusCard(cardType));
-                } /*else if (cardType.equals(CardType.X2)){
-                    cards.add(new DoubleCard(cardType));
-                } */else if (cardType.equals(CardType.PLUSMINUS)){
-                    cards.add(new PlusMinusCard(cardType));
-                } else if (cardType.equals(CardType.FIREWORKS)){
-                    cards.add(new FireworksCard(cardType));
-                } /*else if (cardType.equals(CardType.STRAIGHT)){
-                    cards.add(new StraightCard(cardType));
-                }*/ else {
-                    //DELETE
-                }
+                cards.addAll(instantiateCards(cards, cardType));
             }
         }
         Collections.shuffle(cards);
         this.cards = cards;
+    }
+
+    private List<Card> instantiateCards(List<Card> cards, CardType cardType){
+        if (cardType.equals(CardType.STOP)){
+            cards.add(new StopCard(cardType));
+        } else if (cardType.equals(CardType.CLOVERLEAF)){
+            cards.add(new CloverleafCard(cardType));
+        } else if (cardType.equals(CardType.BONUSx200)){
+            cards.add(new BonusCard(cardType));
+        } else if (cardType.equals(CardType.BONUSx300)){
+            cards.add(new BonusCard(cardType));
+        } else if (cardType.equals(CardType.BONUSx400)){
+            cards.add(new BonusCard(cardType));
+        } else if (cardType.equals(CardType.BONUSx500)){
+            cards.add(new BonusCard(cardType));
+        } else if (cardType.equals(CardType.BONUSx600)){
+            cards.add(new BonusCard(cardType));
+        } else if (cardType.equals(CardType.X2)){
+            cards.add(new DoubleCard(cardType));
+        } else if (cardType.equals(CardType.PLUSMINUS)){
+            cards.add(new PlusMinusCard(cardType));
+        } else if (cardType.equals(CardType.FIREWORKS)){
+            cards.add(new FireworksCard(cardType));
+        } else if (cardType.equals(CardType.STRAIGHT)){
+            cards.add(new StraightCard(cardType));
+        }
+        return cards;
     }
 
     /**

@@ -25,7 +25,7 @@ public class BonusCard  extends Card implements CardRule {
         while (tuttoScore < 1) {
             System.out.println("\nRun turn");
             player.roll(dice);
-            if (c.evaluateRoll(dice).size() > 0) {
+            if (c.evaluateRoll(dice, this.cardType).size() > 0) {
                 // PATTERN FOUND (VALID)
                 if (c.dicePatternSize() == dice.size()) {
                     System.out.println("TUTTO SCORED");
