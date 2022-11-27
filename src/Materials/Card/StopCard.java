@@ -1,5 +1,10 @@
 package Materials.Card;
 
+import Materials.Dice.Dice;
+import Player.Player;
+
+import java.util.List;
+
 public class StopCard extends Card implements CardRule{
 
     protected StopCard(CardType cardType){
@@ -8,7 +13,7 @@ public class StopCard extends Card implements CardRule{
     }
 
     @Override
-    public void executeRule() {
+    public void executeRule(Player player, List<Dice> dice) {
         System.out.println("Execute Stop Card function");
     }
 }

@@ -16,9 +16,6 @@ public class Combination {
     private List<Dice> dicesForPattern;
     private List<DicePattern> foundPatterns;
 
-    private final int hi = 10;
-
-
     public void evaluate(List<Dice> thrownDices){
         foundPatterns = evaluateRoll(thrownDices);
         GameState gs = evaluateState(thrownDices.size());
@@ -33,7 +30,7 @@ public class Combination {
      * @param thrownDices
      * @return the game state that the roll is valid and not null
      */
-    protected List<DicePattern> evaluateRoll(List<Dice> thrownDices /* GAME STATE IS REQUIRED AS WELL */){
+    public List<DicePattern> evaluateRoll(List<Dice> thrownDices /* GAME STATE IS REQUIRED AS WELL */){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
         dicesForPattern = new ArrayList<>();
@@ -71,8 +68,6 @@ public class Combination {
      * @param numberOfThrownDice
      * @return
      */
-
-
     protected GameState evaluateState(int numberOfThrownDice){
         if (numberOfThrownDice == dicesForPattern.size()){
             return TuttoState.state();
@@ -89,7 +84,7 @@ public class Combination {
      * @param heldBackDice
      * @param patterns
      * @return
-     */
+     *//*
     protected int applyEffect(GameState state, Card card, List<Dice> heldBackDice, List<DicePattern> patterns) {
         assert state.equals(state.equals(TuttoState.state()));
         int score = 0;
@@ -104,10 +99,18 @@ public class Combination {
             score += CardType.BONUSx400.getPoints();
         }
         return score;
-    }
+    }*/
 
     public List<Dice> getDicesForPattern() {
         return dicesForPattern;
+    }
+
+    public int dicePatternSize() {
+        int i = 0;
+        for (DicePattern p : foundPatterns){
+            i += p.getRequiredPattern().size();
+        }
+        return i;
     }
 
     public List<DicePattern> getFoundPatterns() {

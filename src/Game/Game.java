@@ -1,7 +1,5 @@
 package Game;
 
-import Materials.Combinations.Combination;
-
 public class Game {
     // current state of the coordinate
     private GameState currentState;
