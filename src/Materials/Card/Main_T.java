@@ -14,6 +14,7 @@ public class Main_T {
         List<Dice> dice = new ArrayList<>(Arrays.asList( new Dice(),  new Dice(),  new Dice(), new Dice(), new Dice(), new Dice()));
         for(int x = 0; x < 10; x++){
             p.draw(d).executeRule(p, dice);
+            System.out.println(p.getScore());
         }
     }
 }

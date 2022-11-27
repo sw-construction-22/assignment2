@@ -2,16 +2,13 @@ package Player;
 
 import Materials.Card.Card;
 import Materials.Card.Deck;
-import Materials.Combinations.Combination;
-import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Player {
     private String name;
+    private int temporary = 0;
     private int score = 0;
 
     /**
@@ -32,6 +29,17 @@ public class Player {
     public Card draw(Deck deck) {
         assert !deck.isEmpty();
         return deck.draw();
+    }
+
+    public void addTemporary(int temporary){
+        this.temporary += temporary;
+    }
+    public void addScore(){
+        score += temporary;
+    }
+
+    public int getScore(){
+        return score;
     }
 
 }
