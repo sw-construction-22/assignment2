@@ -1,5 +1,11 @@
 package Materials.Dice;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class DiceRoll {
     public static void main(String[] args) {
         /**
@@ -15,10 +21,12 @@ public class DiceRoll {
          * which is able to perform operations and do stuff. If you wanted to do it via an array you could have done it in this way
          * Dice[] q = new Dice[]{new Dice(),new Dice(),new Dice(),new Dice(),new Dice()};
          */
-        int[] aDice = new int [] { 0, 0, 0, 0, 0, 0};// creates an array
-        int roll =0;
+
+        List<Dice> diceList = new ArrayList<>(Arrays.asList( new Dice(),  new Dice(),  new Dice(),  new Dice(),  new Dice(),  new Dice()));
+        /*int[] aDice = new int [] { 0, 0, 0, 0, 0, 0};// creates an array*/
+        int roll =0;/*
         Dice die = new Dice();
-        int x,y,w;
+        int x,y,w;*/
         int rerolla = 0, rerollb = 0;
         /**
          * try to avoid hard coded values in the for loop we have 6 dice, a better solution would be to define a constant
@@ -35,33 +43,42 @@ public class DiceRoll {
          *  }
          *  like this you would have a list of rolled dice instead of rolling one dice and saving the value as int array
          */
+        diceList = rollDice(diceList);
+/*
         for (x = 0; x < 6; x++) {
             die.roll();
             aDice[x]= die.getValue(); // sets the dice values
+            System.out.println("Die: " + aDice[x]);
         }
-
+*/
 
         /**
          * this output could get into the for loop before, and then you could replace the hard coded number with x and would
          * get the same result
-         */
-        System.out.println("Die 1: " + aDice[0]);
+         *//*
         System.out.println("Die 2: " + aDice[1]);
         System.out.println("Die 3: " + aDice[2]);
         System.out.println("Die 4: " + aDice[3]);
         System.out.println("Die 5: " + aDice[4]);
-        System.out.println("Die 6: " + aDice[5]);
+        System.out.println("Die 6: " + aDice[5]);*/
 
         do {
             rerolla = inputInt("How many dice you want to reroll? (0-6)"); // type the number of dice you want to reroll
+            // Do you want to re roll -> yes / no
             if (rerolla>0) {
+                System.out.println("Whihc ones : give indices"); // 1,2,5
+                String a = "1,2,4";
+                String[] b = a.split(","); //"1,2,4" - 1 => arraylist index
+                List<Dice> newThrow = new ArrayList<>(Arrays.asList(diceList.get(1 - 1), diceList.get(5 - 1), diceList.get(3 - 1)));
+                newThrow = rollDice(newThrow);
+                /*
                 int[] reroll = new int[rerolla];
                 for (y=0; y<rerolla;y++){
                     /** i assume you are using indices 0-5 for the input values here, not sure if this would be the correct approach, because as a user
                      * I would say I want die 1,2,5 and not 0,1,4
                      *
                      * again input validation is needed */
-                    rerollb=inputInt("Which ones?"); // give the number of one die and then it will repeat itself as many times as the number of die you said you want to reroll
+                    /*rerollb=inputInt("Which ones?"); // give the number of one die and then it will repeat itself as many times as the number of die you said you want to reroll
                     reroll[y]=rerollb;
                 }
                 for (w = 0; w < rerolla; w++) {
@@ -97,6 +114,7 @@ public class DiceRoll {
                 System.out.println("Die 4: " + aDice[3]);
                 System.out.println("Die 5: " + aDice[4]);
                 System.out.println("Die 6: " + aDice[5]);
+            }*/
             }
         }while ((roll<3)&&(rerolla>0)); //roll<3 means that the player has a maximum of 3 rerolls
         /** does the user only have 3 rerolls? This is not mentioned in the rule set */
@@ -106,10 +124,15 @@ public class DiceRoll {
      * The parameter which gets passed into the method should always be in lower case / camel case
      * Upper case at the beginning is for classes
      */
-    static int inputInt(String Prompt) {
-        int result = 0;
+    static List<Integer> inputInt(String prompt) {
+        List<Integer> resultList = new ArrayList<>();
         try {
-            result = Integer.parseInt(input(Prompt).trim()); /** not sure whether this is the best approach I would not further encapsulate this into another func (comment below) */
+            Scanner scanner = new Scanner(System.in);
+            String[] inputs = scanner.nextLine().split(",");
+            for(int x = 0; x < inputs.length; x++){
+                resultList.add(Integer.parseInt(inputs[x]));
+            }
+            //result = Integer.parseInt(input(prompt).trim()); /** not sure whether this is the best approach I would not further encapsulate this into another func (comment below) */
         } catch (Exception e) {
             /**
              * dont do that. in case the user enters some random bs we need to provide a solution, e.g. if the user can
@@ -117,14 +140,24 @@ public class DiceRoll {
              *
              * also, what if the user wants to re-roll 28 dice? we need some cap. it is not possible to roll more than he has
              */
-            result = 0;
         }
-        return result;
+        return resultList;
     }
+
+    static List<Dice> rollDice(List<Dice> diceList){
+        System.out.println("Rolled Dice: ");
+        for (Dice currentDice : diceList){
+            currentDice.roll();
+            System.out.print(currentDice.getValue());
+        }
+        return diceList;
+    }
+
     static String input(String prompt) {
         String inputLine = "";
         System.out.print(prompt);
         try { /** input stream readers are a pain in the ass, I would suggest using a scanner and then you have the method scanner.nextInt() */
+
             java.io.InputStreamReader sys = new java.io.InputStreamReader(
                     System.in);
             java.io.BufferedReader inBuffer = new java.io.BufferedReader(sys);
