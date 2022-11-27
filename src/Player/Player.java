@@ -42,4 +42,12 @@ public class Player {
         return score;
     }
 
+    public boolean reroll(){
+        return false;
+    }
+
+    public void holdBack(){
+
+    }
+
 }
