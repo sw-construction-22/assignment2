@@ -1,7 +1,5 @@
 package Materials.Dice;
 
-import java.util.List;
-
 public class Dice implements Comparable{
     private final int MAX = 6;
 

@@ -17,6 +17,11 @@ public class FireworksCard extends Card implements CardRule {
     }
 
     @Override
+    public int applyCardEffect(int current) {
+        return 0;
+    }
+
+    @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("\n\nExecute Fireworks card");
         // throw dice
@@ -51,6 +56,5 @@ public class FireworksCard extends Card implements CardRule {
                 break;
             }
         }
-
     }
 }

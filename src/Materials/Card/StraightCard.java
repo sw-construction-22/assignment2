@@ -13,6 +13,10 @@ public class StraightCard extends Card implements CardRule {
     }
 
     @Override
+    public int applyCardEffect(int current) {
+        return current + 2000;
+    }
+    @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("Execute Stop Card function");
     }

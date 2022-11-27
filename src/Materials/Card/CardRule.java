@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CardRule {
     public void executeRule(Player player, List<Dice> dice);
+    public int applyCardEffect(int current);
 }

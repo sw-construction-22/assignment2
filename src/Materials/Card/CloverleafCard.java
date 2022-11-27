@@ -17,6 +17,10 @@ public class CloverleafCard extends Card implements CardRule {
 
     protected CloverleafCard(CardType cardType) {assert cardType != null; super.cardType = cardType;}
 
+    @Override
+    public int applyCardEffect(int current) {
+        return 0;
+    }
     /**
      * Make method easier for testing
      * @param player

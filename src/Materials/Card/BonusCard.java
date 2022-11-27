@@ -15,6 +15,11 @@ public class BonusCard  extends Card implements CardRule {
     }
 
     @Override
+    public int applyCardEffect(int current) {
+        return current + cardType.getPoints();
+    }
+
+    @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("\n\nExecute " + cardType +" Bonus card");
         // throw dice

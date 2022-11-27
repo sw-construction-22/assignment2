@@ -2,19 +2,22 @@ package Player;
 
 import Materials.Card.Card;
 import Materials.Card.Deck;
+import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player {
+public class Player {//implements Comparable{
     private String name;
     private int temporary = 0;
     private int score = 0;
 
+    public Player(String name){
+        this.name = name;
+    }
     /**
      * Roll dice
      * @return rolled dice elements
@@ -106,5 +109,85 @@ public class Player {
         }
         return heldBack;
     }
+
+    /**
+     * probably return the game state victory or something
+     * REGULAR FLOW FOR BONUS, DOUBLE CARDS
+     *
+     * IRREGULAR FLOW HAS FIREWORKS CARD
+     * IRREGULAR FLOW HAS PLUS MINUS CARD
+     * IRREGULAR FLOW HAS STRAIGHT CARD
+     *
+     */
+    public void turn(Card c, List<Dice> dice, Combination combination){
+        int tuttoScore = 0;
+        temporary = 0;
+        while (tuttoScore < 1) {
+            if (combination.evaluateRoll(dice, c.getCardType()).size() > 0) {
+                // PATTERN FOUND (VALID)
+                if (combination.dicePatternSize() == dice.size()) {
+                    System.out.println("TUTTO SCORED");
+                    tuttoScore += 1;
+                    addTemporary(c.getCardType().getPoints());
+                    c.applyCardEffect(temporary);
+                    // TUTTO SCORED
+                    // GIVE BACK ALL DICE
+                } else {
+                    // HOLD BACK DICE
+                    System.out.println("Current max points from roll: " + combination.dicePatternMaxPoints());
+                    int index = 1;
+                    for(DicePattern pattern : combination.getFoundPatterns()){
+                        System.out.println(index++ + " " + pattern.toString());
+                    }
+                    if (reroll()){
+                        dice = holdBack(combination.getFoundPatterns(), dice);
+                    } else {
+                        addTemporary(combination.dicePatternMaxPoints());
+                        addScore();
+                        break;
+                    }
+                }
+            } else {
+                // NULL
+                System.out.println("NULL");
+                break;
+            }
+        }
+    }
+
+    public String getName(){return this.name;}
+
+    /**
+     *
+     * @param o the object to be compared.
+     * @return the order of the object
+     *//*
+    @Override
+    public int compareTo(Object o) {
+        return this.name.compareTo(((Player) o).getName());
+    }
+
+    /**
+     *
+     * @param o
+     * @return if the object is equal
+     *//*
+    @Override
+    public boolean equals(Object o)
+    {
+        if(!(o instanceof Player))
+        {
+            return false;
+        }
+        else
+        {
+            Player p=(Player)o;
+            if(this.score== p.getScore())
+            {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
 }

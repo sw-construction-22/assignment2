@@ -28,7 +28,7 @@ public class Deck implements Iterable<Card> {
     public void shuffle(CardType type){
         List<Card> cards = new ArrayList<>();
         for (int amount = 0; amount < type.getNumberOfCards(); amount++){
-            cards.addAll(instantiateCards(cards, type));
+            cards.addAll(instantiateCards(type));
         }
         Collections.shuffle(cards);
         this.cards = cards;
@@ -42,14 +42,15 @@ public class Deck implements Iterable<Card> {
         for( CardType cardType : CardType.values() )
         {
             for (int amount = 0; amount < cardType.getNumberOfCards(); amount++){
-                cards.addAll(instantiateCards(cards, cardType));
+                cards.addAll(instantiateCards(cardType));
             }
         }
         Collections.shuffle(cards);
         this.cards = cards;
     }
 
-    private List<Card> instantiateCards(List<Card> cards, CardType cardType){
+    private List<Card> instantiateCards( CardType cardType){
+        List<Card> cards = new ArrayList<>();
         if (cardType.equals(CardType.STOP)){
             cards.add(new StopCard(cardType));
         } else if (cardType.equals(CardType.CLOVERLEAF)){
