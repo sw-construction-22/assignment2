@@ -29,7 +29,6 @@ public class CombinationTest {
     private final List<Dice> SIXER =                            new ArrayList<>(Arrays.asList( new Dice(6),  new Dice(6),  new Dice(6)));
     private final List<Dice> NULL =                             new ArrayList<>(Arrays.asList( new Dice(2), new Dice(2), new Dice(3), new Dice(4), new Dice(6), new Dice(6)));
     private final List<Dice> ONES_AND_FIVES =                   new ArrayList<>(Arrays.asList( new Dice(1), new Dice(5), new Dice(2), new Dice(1), new Dice(2), new Dice(6)));
-    private final List<Dice> ONES_AND_FIVES_2 =                   new ArrayList<>(Arrays.asList( new Dice(1), new Dice(1), new Dice(3), new Dice(4), new Dice(5), new Dice(5)));
     private final List<Dice> NO_TRIPPLETS_BUT_ONES =            new ArrayList<>(Arrays.asList( new Dice(1), new Dice(2), new Dice(1), new Dice(4), new Dice(4), new Dice(6)));
     private final List<Dice> FULL_TRIPPLE =                     new ArrayList<>(Arrays.asList( new Dice(2), new Dice(2), new Dice(2), new Dice(2), new Dice(2), new Dice(2)));
     private final List<Dice> FULL_TRIPPLE_ONE =                 new ArrayList<>(Arrays.asList( new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)));
@@ -43,7 +42,7 @@ public class CombinationTest {
     public void testEvaluateRoll(){
         Combination c = new Combination();
         assertEquals(c.evaluateRoll(SIXER), new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_SIX)));
-        assertEquals(c.evaluateRoll(ONES_AND_FIVES), new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)));
+        assertEquals(c.evaluateRoll(ONES_AND_FIVES), new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE, DicePattern.SINGLE_FIVE)));
         assertEquals(c.evaluateRoll(NO_TRIPPLETS_BUT_ONES), new ArrayList<>(Arrays.asList(DicePattern.SINGLE_ONE, DicePattern.SINGLE_ONE)));
         assertEquals(c.evaluateRoll(FULL_TRIPPLE),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_TWO, DicePattern.TRIPPLE_TWO)));
         assertEquals(c.evaluateRoll(FULL_TRIPPLE_ONE),  new ArrayList<>(Arrays.asList(DicePattern.TRIPPLE_ONE, DicePattern.TRIPPLE_ONE)));

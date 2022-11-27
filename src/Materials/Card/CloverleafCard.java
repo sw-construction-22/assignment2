@@ -1,6 +1,9 @@
 package Materials.Card;
 
 
+import Materials.Card.Card;
+import Materials.Card.CardRule;
+import Materials.Card.CardType;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
@@ -10,10 +13,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CloverleafCard extends Card implements CardRule{
+public class CloverleafCard extends Card implements CardRule {
 
     protected CloverleafCard(CardType cardType) {assert cardType != null; super.cardType = cardType;}
 
+    /**
+     * Make method easier for testing
+     * @param player
+     * @param dice
+     */
     @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("Execute Cloverleaf Card function");

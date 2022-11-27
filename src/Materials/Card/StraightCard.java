@@ -1,16 +1,13 @@
 package Materials.Card;
 
-import Materials.Card.Card;
-import Materials.Card.CardRule;
-import Materials.Card.CardType;
 import Materials.Dice.Dice;
 import Player.Player;
 
 import java.util.List;
 
-public class StopCard extends Card implements CardRule {
+public class StraightCard extends Card implements CardRule {
 
-    protected StopCard(CardType cardType){
+    protected StraightCard(CardType cardType){
         assert cardType != null;
         super.cardType = cardType;
     }

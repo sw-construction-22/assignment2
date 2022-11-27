@@ -34,23 +34,23 @@ public class Deck implements Iterable<Card> {
                 } else if (cardType.equals(CardType.CLOVERLEAF)){
                     cards.add(new CloverleafCard(cardType));
                 } else if (cardType.equals(CardType.BONUSx200)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new Bonusx200Card(cardType));
                 } else if (cardType.equals(CardType.BONUSx300)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new Bonusx300Card(cardType));
                 } else if (cardType.equals(CardType.BONUSx400)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new Bonusx400Card(cardType));
                 } else if (cardType.equals(CardType.BONUSx500)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new Bonusx500Card(cardType));
                 } else if (cardType.equals(CardType.BONUSx600)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new Bonusx600Card(cardType));
                 } else if (cardType.equals(CardType.X2)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new DoubleCard(cardType));
                 } else if (cardType.equals(CardType.PLUSMINUS)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new PlusMinusCard(cardType));
                 } else if (cardType.equals(CardType.FIREWORKS)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new FireworksCard(cardType));
                 } else if (cardType.equals(CardType.STRAIGHT)){
-                    cards.add(new CloverleafCard(cardType));
+                    cards.add(new StraightCard(cardType));
                 }
             }
         }

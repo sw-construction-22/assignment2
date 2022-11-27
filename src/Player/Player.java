@@ -2,8 +2,12 @@ package Player;
 
 import Materials.Card.Card;
 import Materials.Card.Deck;
+import Materials.Combinations.Combination;
+import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Player {
