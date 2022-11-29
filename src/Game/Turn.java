@@ -19,8 +19,10 @@ public class Turn {
     private RollState rollState;
     private TurnState turnState;
     private Combination combination = new Combination();
+    private List<Dice> dice;
 
-    public Turn(Player player, int highestScore, Deck deck){
+    public Turn(Player player, int highestScore, Deck deck, List<Dice> dice){
+        this.dice = dice;
         this.player = player;
         this.highestScore = highestScore;
         drawnCards = new ArrayList<>();
@@ -33,9 +35,11 @@ public class Turn {
         while(turnState.equals(TurnState.RUNNING)){
             int tuttoScore = 0;
             Card card = player.draw(deck);
+            System.out.println("Card drawn: " + card.getCardType());
             drawnCards.add(card);
             if (!card.getCardType().equals(CardType.STOP)){
                 while(rollState.equals(RollState.ROLL)){
+                    dice = player.roll(dice);
                     if (combination.evaluateRoll(dice, card.getCardType()).size() > 0) {
                         // PATTERN FOUND (VALID)
                         if (combination.dicePatternSize() == dice.size()) {
@@ -56,11 +60,8 @@ public class Turn {
                                     //draw a new card
                                     // dice = ;
                                 } else {
-                                    // apply the effects foreach drawn card with the points scored for it
-                                    if(card.getCardType().equals(CardType.PLUSMINUS)){
-                                        //subtract from first player
-                                    }
-
+                                    // set state to end roll
+                                    // break
                                 }
                             }
                         } else {
@@ -75,10 +76,12 @@ public class Turn {
                             } else {
                                 player.addTemporary(combination.dicePatternMaxPoints());
                                 player.addScore();
+                                turnState = TurnState.STOP;
                                 break;
                             }
                         }
                     } else {
+                        rollState = RollState.NULL;
                         // NULL scored
                         if (card.getCardType().equals(CardType.FIREWORKS)){
                             player.addScore();
@@ -87,32 +90,10 @@ public class Turn {
                     }
                 }
             }
+            else {
+                turnState = TurnState.STOP;
+            }
         }
     }
 
-    /**
-     * class for a turn
-     *
-     * new turn(player, leaderScore) (we pass leader score to not alter the other players)
-     * while(turn.run){
-     *  player.drawCard();
-     *  if(draw != stop){
-     *      setTurnRollState
-     *      while(turnRollState){
-     *          do the whole stuff from turn ... if else statemetns
-     *      }
-     *  }
-     *  else{turn.stop}
-     * }
-     *
-     */
-
-    public List<Player> turn(Player player, Card c, List<Dice> dice, Combination combination){
-        int tuttoScore = 0;
-
-        while(!c.getCardType().equals(CardType.STOP)){
-
-        }
-        return null;
-    }
 }

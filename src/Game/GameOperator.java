@@ -15,14 +15,14 @@ public class GameOperator {
     private Deck deck;
     private List<Dice> dice;
     private Combination combination;
-    public GameOperator(){
+    public GameOperator() {
         deck = new Deck();
         deck.isEmpty();
 
         // Input how many players
         players = new ArrayList<>(Arrays.asList(new Player("Hansel"), new Player("Gretel"), new Player("Arnold")));
         // sort players
-        dice = new ArrayList<>(Arrays.asList( new Dice(),  new Dice(),  new Dice(), new Dice(), new Dice(), new Dice()));
+        dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
 
         // this stuff should probably be in a subclass of either cards or dice or something game operator or so..
         combination = new Combination();
@@ -30,20 +30,20 @@ public class GameOperator {
         // while game state or something
         // game turn
         getAlphabetical();
-        for(int i = 0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
+            for (Player x : players){
+                System.out.println(x.getName());
+            }
 
-            for(Player p : players){
-
-                Card card = p.draw(deck);
-                System.out.println("Card drawn: " + card.getCardType());
-                if(card.getCardType() != CardType.STOP /*&&
-                        card.getCardType() != CardType.CLOVERLEAF &&
-                        card.getCardType() != CardType.PLUSMINUS*/) {
-                    dice = p.roll(dice);
-                    turn(p, card, dice, combination);
-                } else {
-                    // special turn for cloverleaf and plus minus (stack stuff)
-                }
+            for (Player p : players) {
+                System.out.println("-------------- START TURN ------------------");
+                System.out.println("Player's move: " + p.getName());
+                System.out.println("Player's score: " + p.getScore());
+                Turn current = new Turn(p, getGameLeader().get(0).getScore(), deck, dice);
+                System.out.println("-------------- END TURN ------------------");
+                /**
+                 * apply the effects of the cards
+                 */
             }
         }
     }
@@ -78,66 +78,21 @@ public class GameOperator {
      *
      */
 
-    /**
-     * TODO: return manipulated players or something
-     * @param c
-     * @param dice
-     * @param combination
-     */
-    public List<Player> turn(Player player, Card c, List<Dice> dice, Combination combination){
-        int tuttoScore = 0;
+    public void endTurn(Player player){
+        player.addTemporary(combination.dicePatternMaxPoints());
+        player.addScore();
+    }
 
-        while(!c.getCardType().equals(CardType.STOP)){
-            if (combination.evaluateRoll(dice, c.getCardType()).size() > 0) {
-                // PATTERN FOUND (VALID)
-                if (combination.dicePatternSize() == dice.size()) {
-                    System.out.println("TUTTO SCORED");
-                    tuttoScore+=1;
-                    if(c.getCardType().equals(CardType.CLOVERLEAF)){
-                        if(tuttoScore == 2){
-                            // GAME WIN apply cloverleaf effect
-                            System.out.println("Game won");
-                            break;
-                        } else {
-                            // return dice and reroll
-                            // GIVE BACK ALL DICE
-                        }
-                    } else {
-                        if (player.reroll()) {
-                            //give back all dice
-                            //draw a new card
-                            // dice = ;
-                        } else {
-                            // apply the effects foreach drawn card with the points scored for it
-                            if(c.getCardType().equals(CardType.PLUSMINUS)){
-                                //subtract from first player
-                            }
-
-                        }
-                    }
-                } else {
-                    // HOLD BACK DICE
-                    System.out.println("Current max points from roll: " + combination.dicePatternMaxPoints());
-                    int index = 1;
-                    for(DicePattern pattern : combination.getFoundPatterns()){
-                        System.out.println(index++ + " " + pattern.toString());
-                    }
-                    if (player.reroll()){
-                        dice = player.holdBack(combination.getFoundPatterns(), dice);
-                    } else {
-                        player.addTemporary(combination.dicePatternMaxPoints());
-                        player.addScore();
-                        break;
-                    }
-                }
-            } else {
-                // NULL scored
-                if (c.getCardType().equals(CardType.FIREWORKS)){
-                    player.addScore();
-                }
-                //set turnstate to end
-            }
+    public void regularThrow(Player player){
+        System.out.println("Current max points from roll: " + combination.dicePatternMaxPoints());
+        int index = 1;
+        for(DicePattern pattern : combination.getFoundPatterns()){
+            System.out.println(index++ + " " + pattern.toString());
         }
-        return null;
+        if (player.reroll()){
+            dice = player.holdBack(combination.getFoundPatterns(), dice);
+        } else {
+            endTurn(player);
+        }
     }
 }
