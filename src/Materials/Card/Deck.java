@@ -51,29 +51,8 @@ public class Deck implements Iterable<Card> {
 
     private List<Card> instantiateCards( CardType cardType){
         List<Card> cards = new ArrayList<>();
-        if (cardType.equals(CardType.STOP)){
-            cards.add(new StopCard(cardType));
-        } else if (cardType.equals(CardType.CLOVERLEAF)){
-            cards.add(new CloverleafCard(cardType));
-        } else if (cardType.equals(CardType.BONUSx200)){
-            cards.add(new BonusCard(cardType));
-        } else if (cardType.equals(CardType.BONUSx300)){
-            cards.add(new BonusCard(cardType));
-        } else if (cardType.equals(CardType.BONUSx400)){
-            cards.add(new BonusCard(cardType));
-        } else if (cardType.equals(CardType.BONUSx500)){
-            cards.add(new BonusCard(cardType));
-        } else if (cardType.equals(CardType.BONUSx600)){
-            cards.add(new BonusCard(cardType));
-        } else if (cardType.equals(CardType.X2)){
-            cards.add(new DoubleCard(cardType));
-        } else if (cardType.equals(CardType.PLUSMINUS)){
-            cards.add(new PlusMinusCard(cardType));
-        } else if (cardType.equals(CardType.FIREWORKS)){
-            cards.add(new FireworksCard(cardType));
-        } else if (cardType.equals(CardType.STRAIGHT)){
-            cards.add(new StraightCard(cardType));
-        }
+        CardFactory factory = new CardFactory();
+        cards.add(factory.getCard(cardType));
         return cards;
     }
 
