@@ -1,6 +1,5 @@
 package Materials.Card;
 
-
 public abstract class Card implements CardRule {
     protected static final Card[] CARDS = new Card[CardType.values().length];
     protected CardType cardType;

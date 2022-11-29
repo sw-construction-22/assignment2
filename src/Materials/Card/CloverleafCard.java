@@ -19,7 +19,7 @@ public class CloverleafCard extends Card implements CardRule {
 
     @Override
     public int applyCardEffect(int current) {
-        return 0;
+        return 999999999;
     }
     /**
      * Make method easier for testing

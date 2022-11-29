@@ -1,6 +1,8 @@
 package Player;
 
+import Game.TurnState;
 import Materials.Card.Card;
+import Materials.Card.CardType;
 import Materials.Card.Deck;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
@@ -10,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player {//implements Comparable{
+public class Player {
     private String name;
     private int temporary = 0;
     private int score = 0;
+
+    private TurnState turnState;
 
     public Player(String name){
         this.name = name;
@@ -122,16 +126,28 @@ public class Player {//implements Comparable{
     public void turn(Card c, List<Dice> dice, Combination combination){
         int tuttoScore = 0;
         temporary = 0;
-        while (tuttoScore < 1) {
+        while(!c.getCardType().equals(CardType.STOP)){
             if (combination.evaluateRoll(dice, c.getCardType()).size() > 0) {
                 // PATTERN FOUND (VALID)
                 if (combination.dicePatternSize() == dice.size()) {
                     System.out.println("TUTTO SCORED");
-                    tuttoScore += 1;
-                    addTemporary(c.getCardType().getPoints());
-                    c.applyCardEffect(temporary);
-                    // TUTTO SCORED
-                    // GIVE BACK ALL DICE
+                    tuttoScore+=1;
+                    if(c.getCardType().equals(CardType.CLOVERLEAF)){
+                        if(tuttoScore == 2){
+                            // GAME WIN apply cloverleaf effect
+                            System.out.println("Game won");
+                            break;
+                        } else {
+                            // return dice and reroll
+                            // GIVE BACK ALL DICE
+                        }
+                    } else {
+                        if(c.getCardType().equals(CardType.PLUSMINUS)){
+                            //subtract from first player
+                        }
+                        // apply card effect
+                        // GIVE BACK ALL DICE
+                    }
                 } else {
                     // HOLD BACK DICE
                     System.out.println("Current max points from roll: " + combination.dicePatternMaxPoints());
@@ -145,12 +161,14 @@ public class Player {//implements Comparable{
                         addTemporary(combination.dicePatternMaxPoints());
                         addScore();
                         break;
-                    }
+                     }
                 }
             } else {
-                // NULL
-                System.out.println("NULL");
-                break;
+                // NULL scored
+               if (c.getCardType().equals(CardType.FIREWORKS)){
+                   addScore();
+               }
+               //set turnstate to end
             }
         }
     }
