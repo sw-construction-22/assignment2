@@ -55,15 +55,15 @@ public class GameOperator {
     }
     public List<Player> getGameLeader(){
         Comparator<Player> byScore = Comparator.comparing(Player::getScore);
-        Collections.sort(players, byScore);
-        Collections.reverse(players); //highest player on top
+        List<Player> copy = new ArrayList<>(players);
+        Collections.sort(copy, byScore);
+        Collections.reverse(copy); //highest player on top
         List<Player> leaders = new ArrayList<>();
-        for (Player p : players){
-            if (p.getScore() == players.get(0).getScore()){
+        for (Player p : copy){
+            if (p.getScore() == copy.get(0).getScore()){
                 leaders.add(p);
             }
         }
-        getAlphabetical();
         return leaders;
     }
 

@@ -23,7 +23,7 @@ public class Turn {
 
     public Turn(Player player, int highestScore, Deck deck, List<Dice> dice){
         this.dice = dice;
-        this.player = player;
+        this.player = new Player(player);
         this.highestScore = highestScore;
         drawnCards = new ArrayList<>();
         rollState = RollState.ROLL;
@@ -94,6 +94,10 @@ public class Turn {
                 turnState = TurnState.STOP;
             }
         }
+    }
+
+    public Player getPlayer(){
+        return player;
     }
 
 }

@@ -22,6 +22,10 @@ public class Player {
     public Player(String name){
         this.name = name;
     }
+    public Player(Player player){
+        this.name = player.getName();
+        this.score = player.getScore();
+    }
     /**
      * Roll dice
      * @return rolled dice elements
