@@ -81,7 +81,9 @@ public class Turn {
                             }
                         }
                     } else {
+                        System.out.println("NULL scored");
                         rollState = RollState.NULL;
+                        turnState = TurnState.STOP;
                         // NULL scored
                         if (card.getCardType().equals(CardType.FIREWORKS)){
                             player.addScore();
