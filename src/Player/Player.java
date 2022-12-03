@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * author: Daniel Lutziger
+ */
 public class Player {//implements Comparable{
     private String name;
     private int temporary = 0;

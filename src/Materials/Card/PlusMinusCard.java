@@ -4,7 +4,9 @@ import Materials.Dice.Dice;
 import Player.Player;
 
 import java.util.List;
-
+/**
+ * author: Daniel Lutziger
+ */
 public class PlusMinusCard extends Card implements CardRule {
 
     protected PlusMinusCard(CardType cardType){
