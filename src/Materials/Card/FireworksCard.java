@@ -20,7 +20,7 @@ public class FireworksCard extends Card implements CardRule {
 
     @Override
     public int applyCardEffect(int current) {
-        return 0;
+        return current;
     }
 
     @Override
