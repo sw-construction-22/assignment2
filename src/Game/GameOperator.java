@@ -139,7 +139,9 @@ public class GameOperator {
                 numOfPlayers = s.nextInt();
                 assert numOfPlayers >= 2 && numOfPlayers <= 4;
                 invalidInput = false;
-            } catch (Exception e ){
+            } catch (Exception e){
+                System.out.println("Enter a valid input pls");
+            } catch (AssertionError ae){
                 System.out.println("Enter a valid input pls");
             }
         }
