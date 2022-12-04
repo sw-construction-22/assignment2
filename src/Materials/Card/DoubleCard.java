@@ -4,9 +4,6 @@ import Game.GameState;
 import Game.GameTurn;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
-import Player.Player;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class DoubleCard extends Card implements CardRule {
@@ -59,11 +56,6 @@ public class DoubleCard extends Card implements CardRule {
             }
         }while(gameTurn.getState().equals(GameState.REROLL));
         return gameTurn;
-    }
-
-    @Override
-    public void executeRule(Player player, List<Dice> dice) {
-
     }
 
     @Override

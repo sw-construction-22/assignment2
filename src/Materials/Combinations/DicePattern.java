@@ -16,7 +16,11 @@ public enum DicePattern {
     TRIPPLE_SIX(new ArrayList<>(Arrays.asList(new Dice(6), new Dice(6), new Dice(6))), 600),
     STRAIGHT(new ArrayList<>(Arrays.asList(new Dice(1), new Dice(2), new Dice(3), new Dice(4), new Dice(5), new Dice(6))),  2000),
     SINGLE_ONE(new ArrayList<>(Arrays.asList(new Dice(1))), 100),
-    SINGLE_FIVE(new ArrayList<>(Arrays.asList(new Dice(5))), 50);
+    SINGLE_TWO(new ArrayList<>(Arrays.asList(new Dice(2))), 100),
+    SINGLE_THREE(new ArrayList<>(Arrays.asList(new Dice(3))), 100),
+    SINGLE_FOUR(new ArrayList<>(Arrays.asList(new Dice(4))), 100),
+    SINGLE_FIVE(new ArrayList<>(Arrays.asList(new Dice(5))), 50),
+    SINGLE_SIX(new ArrayList<>(Arrays.asList(new Dice(6))), 100);
 
     private final List<Dice> requiredPattern;
     private final int value;

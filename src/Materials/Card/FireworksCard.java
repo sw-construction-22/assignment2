@@ -1,5 +1,6 @@
 package Materials.Card;
 
+import Game.GameState;
 import Game.GameTurn;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
@@ -23,47 +24,49 @@ public class FireworksCard extends Card implements CardRule {
     public int applyCardEffect(int current) {
         return current;
     }
+    
 
     @Override
-    public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("\n\nExecute Fireworks card");
-        // throw dice
-        // accept 2 tutto only and win
-        Combination c = new Combination();
-        while (true) {
-            System.out.println("Run turn");
-            player.roll(dice);
-            if (c.evaluateRoll(dice, this.cardType).size() > 0) {
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("Run turn");
+        do {
+            gameTurn.getP().roll(gameTurn.getDice());
+            List<DicePattern> patterns = evaluateRoll(gameTurn.getDice());
+            if (patterns.size() > 0) {
                 // PATTERN FOUND (VALID)
-                if (c.dicePatternSize() == dice.size()) {
-                    System.out.println("TUTTO SCORED");
-                    dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
-                    // TUTTO SCORED
-                    // GIVE BACK ALL DICE
+                if (DicePattern.dicePatternSize(patterns) == gameTurn.getDice().size()) {
+                    System.out.println("Current max points from roll: " + DicePattern.dicePatternMaxPoints(patterns));
+                    System.out.println("Tutto scored");
+                    gameTurn.addPoints(DicePattern.dicePatternMaxPoints(patterns));
+                    gameTurn.setState(GameState.TUTTO);
+                    return gameTurn;
                 } else {
-                    // HOLD BACK DICE
-                    List<DicePattern> founds = c.getFoundPatterns();
-                    System.out.println("Removing all the valid patterns from the dice: ");
-                    for (DicePattern p : founds) {
-                        player.addTemporary(p.getValue());
-                        System.out.println(" - " + p.toString());
-                        for (Dice d : p.getRequiredPattern()) {
-                            dice.remove(d);
+                    {
+                        System.out.println("Current max points from roll: " + DicePattern.dicePatternMaxPoints(patterns));
+                        int index = 1;
+                        for (DicePattern pattern : patterns) {
+                            System.out.println(index++ + " " + pattern.toString());
+                        }
+                        if (gameTurn.getP().reroll()) {
+                            List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
+                            gameTurn.addPoints(DicePattern.dicePatternMaxPoints(evaluateRoll(diceToLayBack))); //evaluate the points for the laid back dice
+                            for(Dice current : diceToLayBack){
+                                gameTurn.setBackDie(current);
+                            }
+                            gameTurn.setState(GameState.REROLL);
+                        } else {
+                            gameTurn.addPoints(DicePattern.dicePatternMaxPoints(patterns));
+                            gameTurn.setState(GameState.END);
+                            return gameTurn;
                         }
                     }
                 }
             } else {
                 // NULL
-                //player.addScore();
-                System.out.println("NULL");
-                break;
+                gameTurn.setState(GameState.END);
+                return gameTurn;
             }
-        }
-    }
-
-    @Override
-    public GameTurn executeTurn(GameTurn gameTurn) {
-        System.out.println("no one cares yet");
-        return null;
+        }while(gameTurn.getState().equals(GameState.REROLL));
+        return gameTurn;
     }
 }

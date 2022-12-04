@@ -1,6 +1,5 @@
 package Player;
 
-import Game.TurnState;
 import Materials.Card.Card;
 import Materials.Card.Deck;
 import Materials.Combinations.DicePattern;
@@ -12,10 +11,7 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private int temporary = 0;
     private int score = 0;
-
-    private TurnState turnState;
 
     public Player(String name){
         this.name = name;
@@ -47,20 +43,12 @@ public class Player {
         return deck.draw();
     }
 
-    public void addTemporary(int temporary){
-        this.temporary += temporary;
-    }
-
     public void addScore(int scoreToAdd){
         score += scoreToAdd;
     }
 
     public int getScore(){
         return score;
-    }
-
-    public void turnStart(){
-        temporary = 0;
     }
 
     public boolean reroll(){
@@ -108,10 +96,6 @@ public class Player {
             }
 
             heldBack = new ArrayList<>(resultList);
-            /*heldBack = new ArrayList<>(dice);
-            for(Dice current : resultList){
-                heldBack.remove(current);
-            }*/
         }
         return heldBack;
     }

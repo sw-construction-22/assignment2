@@ -9,25 +9,25 @@ public class CardFactory {
         if (cardType.equals(CardType.STOP)){
             return new StopCard(cardType);
         } else if (cardType.equals(CardType.CLOVERLEAF)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.BONUSx200)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.BONUSx300)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.BONUSx400)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.BONUSx500)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.BONUSx600)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.X2)){
-            return new DoubleCard(cardType);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.PLUSMINUS)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.FIREWORKS)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         } else if (cardType.equals(CardType.STRAIGHT)){
-            return new DoubleCard(CardType.X2);
+            return new StraightCard(CardType.STRAIGHT);
         }
         /**
          * if (cardType.equals(CardType.STOP)){

@@ -20,11 +20,6 @@ public class PlusMinusCard extends Card implements CardRule {
         return current+1000;
     }
     @Override
-    public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute Stop Card function");
-    }
-
-    @Override
     public GameTurn executeTurn(GameTurn gameTurn) {
         System.out.println("no one cares yet");
         return null;

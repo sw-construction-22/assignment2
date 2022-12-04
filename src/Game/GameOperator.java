@@ -142,11 +142,6 @@ public class GameOperator {
         return leaders;
     }
 
-    public void endTurn(Player player){
-        player.addTemporary(combination.dicePatternMaxPoints());
-        //player.addScore();
-    }
-
     public void setGoalScore(){
         System.out.println("What should be the goal score of the game until someone achieves a victory?");
         boolean invalidInput = true;
@@ -184,18 +179,5 @@ public class GameOperator {
             }
         }
         return false;
-    }
-
-    public void regularThrow(Player player){
-        System.out.println("Current max points from roll: " + combination.dicePatternMaxPoints());
-        int index = 1;
-        for(DicePattern pattern : combination.getFoundPatterns()){
-            System.out.println(index++ + " " + pattern.toString());
-        }
-        if (player.reroll()){
-            dice = player.holdBack(combination.getFoundPatterns(), dice);
-        } else {
-            endTurn(player);
-        }
     }
 }

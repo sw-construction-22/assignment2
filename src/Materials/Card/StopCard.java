@@ -18,10 +18,6 @@ public class StopCard extends Card implements CardRule {
     public int applyCardEffect(int current) {
         return 0;
     }
-    @Override
-    public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute Stop Card function");
-    }
 
     @Override
     public GameTurn executeTurn(GameTurn gameTurn) {

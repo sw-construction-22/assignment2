@@ -39,6 +39,10 @@ public abstract class Card implements CardRule {
         List<DicePattern> pats;
         pats = new ArrayList<>(Arrays.asList(DicePattern.values()));
         pats.remove(DicePattern.STRAIGHT);
+        pats.remove(DicePattern.SINGLE_TWO);
+        pats.remove(DicePattern.SINGLE_THREE);
+        pats.remove(DicePattern.SINGLE_FOUR);
+        pats.remove(DicePattern.SINGLE_SIX);
         for (DicePattern pattern : pats){
             // slice list to check if it matches with a subset
             for(int subSetStart = 0; subSetStart <= (thrownDiceCopy.size() - pattern.getRequiredPattern().size()); subSetStart++){

@@ -1,14 +1,12 @@
 package Materials.Card;
 
 
+import Game.GameState;
 import Game.GameTurn;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
-import Player.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CloverleafCard extends Card implements CardRule {
@@ -19,51 +17,43 @@ public class CloverleafCard extends Card implements CardRule {
     public int applyCardEffect(int current) {
         return 999999999;
     }
-    /**
-     * Make method easier for testing
-     * @param player
-     * @param dice
-     */
-    @Override
-    public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("\n\nExecute Cloverleaf Card function");
-        // throw dice
-        // accept 2 tutto only and win
-        int tuttoScore = 0;
-        Combination c = new Combination();
-        while (tuttoScore < 2) {
-            System.out.println("\nRun turn");
-            player.roll(dice);
-            if (c.evaluateRoll(dice, this.cardType).size() > 0) {
-                // PATTERN FOUND (VALID)
-                if (c.dicePatternSize() == dice.size()) {
-                    System.out.println("TUTTO SCORED");
-                    tuttoScore += 1;
-                    dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
-                    // TUTTO SCORED
-                    // GIVE BACK ALL DICE
-                } else {
-                    // HOLD BACK DICE
-                    int index = 1;
-                    for(DicePattern pattern : c.getFoundPatterns()){
-                        System.out.println(index++ + " " + pattern.toString());
-                    }
-                    dice = player.holdBack(c.getFoundPatterns(), dice);
-                }
-            } else {
-                // NULL
-                System.out.println("NULL");
-                break;
-            }
-            if (tuttoScore == 2) {
-                System.out.println("WIN");
-            }
-        }
-    }
 
     @Override
     public GameTurn executeTurn(GameTurn gameTurn) {
-        System.out.println("no one cares yet");
-        return null;
+        int tuttoScore = 0;
+        System.out.println("Run turn");
+        do {
+            gameTurn.getP().roll(gameTurn.getDice());
+            List<DicePattern> patterns = evaluateRoll(gameTurn.getDice());
+            if (patterns.size() > 0) {
+                // PATTERN FOUND (VALID)
+                if (DicePattern.dicePatternSize(patterns) == gameTurn.getDice().size()) {
+                    tuttoScore += 1;
+                    if (tuttoScore == 2){
+                        gameTurn.setState(GameState.WIN);
+                        return gameTurn;
+                    }
+                    System.out.println("Tutto scored");
+                } else {
+                    {
+                        int index = 1;
+                        for (DicePattern pattern : patterns) {
+                            System.out.println(index++ + " " + pattern.toString());
+                        }
+                        List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
+                        gameTurn.addPoints(DicePattern.dicePatternMaxPoints(evaluateRoll(diceToLayBack))); //evaluate the points for the laid back dice
+                        for(Dice current : diceToLayBack){
+                            gameTurn.setBackDie(current);
+                        }
+                        gameTurn.setState(GameState.REROLL);
+                    }
+                }
+            } else {
+                // NULL
+                gameTurn.setState(GameState.NULL);
+                return gameTurn;
+            }
+        }while(tuttoScore < 2);
+        return gameTurn;
     }
 }
