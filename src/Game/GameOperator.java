@@ -2,8 +2,6 @@ package Game;
 
 import Materials.Card.Card;
 import Materials.Card.Deck;
-import Materials.Combinations.Combination;
-import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
 
@@ -14,7 +12,6 @@ public class GameOperator {
     private int goalScore;
     private Deck deck;
     private List<Dice> dice;
-    private Combination combination;
     private GameState gameState = GameState.RUNNING;
     public GameOperator() {
         deck = new Deck();
@@ -26,7 +23,6 @@ public class GameOperator {
         dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
 
         // this stuff should probably be in a subclass of either cards or dice or something game operator or so..
-        combination = new Combination();
         // start game aka turns
         // while game state or something
         // game turn

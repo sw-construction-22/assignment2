@@ -3,10 +3,11 @@ package Materials.Card;
 
 import Game.GameState;
 import Game.GameTurn;
-import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CloverleafCard extends Card implements CardRule {
@@ -28,12 +29,16 @@ public class CloverleafCard extends Card implements CardRule {
             if (patterns.size() > 0) {
                 // PATTERN FOUND (VALID)
                 if (DicePattern.dicePatternSize(patterns) == gameTurn.getDice().size()) {
+                    System.out.println("Tutto scored");
                     tuttoScore += 1;
                     if (tuttoScore == 2){
                         gameTurn.setState(GameState.WIN);
+                        System.out.println("WIN");
                         return gameTurn;
+                    } else {
+                        gameTurn.setDice(new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice())));
                     }
-                    System.out.println("Tutto scored");
+
                 } else {
                     {
                         int index = 1;
@@ -41,7 +46,6 @@ public class CloverleafCard extends Card implements CardRule {
                             System.out.println(index++ + " " + pattern.toString());
                         }
                         List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
-                        gameTurn.addPoints(DicePattern.dicePatternMaxPoints(evaluateRoll(diceToLayBack))); //evaluate the points for the laid back dice
                         for(Dice current : diceToLayBack){
                             gameTurn.setBackDie(current);
                         }

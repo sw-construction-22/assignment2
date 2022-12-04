@@ -1,6 +1,8 @@
 package Materials.Card;
 
+import Game.GameState;
 import Game.GameTurn;
+import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
 
@@ -19,9 +21,5 @@ public class PlusMinusCard extends Card implements CardRule {
     public int applyCardEffect(int current) {
         return current+1000;
     }
-    @Override
-    public GameTurn executeTurn(GameTurn gameTurn) {
-        System.out.println("no one cares yet");
-        return null;
-    }
+
 }

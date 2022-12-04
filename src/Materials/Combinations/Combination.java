@@ -1,5 +1,5 @@
 package Materials.Combinations;
-
+/*
 import Materials.Card.CardType;
 import Materials.Dice.Dice;
 
@@ -14,8 +14,8 @@ public class Combination {
      * check if the roll is valid
      * @param thrownDices
      * @return the game state that the roll is valid and not null
-     */
-    public List<DicePattern> evaluateRoll(List<Dice> thrownDices, CardType type /* GAME STATE IS REQUIRED AS WELL */){
+     *//*
+    public List<DicePattern> evaluateRoll(List<Dice> thrownDices, CardType type /* GAME STATE IS REQUIRED AS WELL *//*){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6 && type != null;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
         foundPatterns = new ArrayList<>();
@@ -85,3 +85,4 @@ public class Combination {
     // => List<Dice>
     // => return poitns
 }
+*/
