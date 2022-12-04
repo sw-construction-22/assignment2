@@ -36,7 +36,7 @@ public class GameOperator {
                 GameState turnState = GameState.FIRSTROLL;
 
                 /**
-                 * Check if the state is not over and execute the stuff
+                 * Check if the state is not over and execute the stuff ! TODO
                  */
                 while(!turnState.equals(GameState.CLOVERLEAF) &&
                         !turnState.equals(GameState.WIN) &&
@@ -45,11 +45,11 @@ public class GameOperator {
                     System.out.println("-------------- START TURN ------------------");
                     System.out.println("Player's move: " + p.getName());
                     System.out.println("Player's score: " + p.getScore());
-                    while(playerTurnDecision()){ //while the user wants to see the scoreboard
+                    /*while(playerTurnDecision()){ //while the user wants to see the scoreboard
                         for(Player x : getScoreboard()){
                             System.out.println(x.getName() + " : " + x.getScore());
                         }
-                    }
+                    }*/
                     Card c = p.draw(deck);
                     System.out.println("Drawn Card: " + c.getCardType());
                     gameTurn.addCard(c);

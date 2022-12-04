@@ -58,4 +58,11 @@ public enum DicePattern {
         }
         return i;
     }
+    public static int dicePatternMaxPointsFireworks(List<DicePattern> foundPatterns) {
+        int i = 0;
+        for (DicePattern p : foundPatterns){
+            i += p.getValue();
+        }
+        return i;
+    }
 }

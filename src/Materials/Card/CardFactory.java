@@ -9,25 +9,25 @@ public class CardFactory {
         if (cardType.equals(CardType.STOP)){
             return new StopCard(cardType);
         } else if (cardType.equals(CardType.CLOVERLEAF)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.BONUSx200)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.BONUSx300)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.BONUSx400)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.BONUSx500)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.BONUSx600)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.X2)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.PLUSMINUS)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.FIREWORKS)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         } else if (cardType.equals(CardType.STRAIGHT)){
-            return new CloverleafCard(CardType.CLOVERLEAF);
+            return new FireworksCard(CardType.FIREWORKS);
         }
         /**
          * if (cardType.equals(CardType.STOP)){
