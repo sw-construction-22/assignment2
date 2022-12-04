@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Turn {
     private List<Card> drawnCards;
+    private List<Integer> collectedPoints;
     private Player player;
     private int highestScore;
     private int temporaryScore;
@@ -75,7 +76,7 @@ public class Turn {
                                 dice = player.holdBack(combination.getFoundPatterns(), dice);
                             } else {
                                 player.addTemporary(combination.dicePatternMaxPoints());
-                                player.addScore();
+                                //player.addScore();
                                 turnState = TurnState.STOP;
                                 break;
                             }
@@ -86,7 +87,7 @@ public class Turn {
                         turnState = TurnState.STOP;
                         // NULL scored
                         if (card.getCardType().equals(CardType.FIREWORKS)){
-                            player.addScore();
+                            //player.addScore();
                         }
                         //set turnstate to end
                     }

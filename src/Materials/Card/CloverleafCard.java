@@ -1,9 +1,7 @@
 package Materials.Card;
 
 
-import Materials.Card.Card;
-import Materials.Card.CardRule;
-import Materials.Card.CardType;
+import Game.GameTurn;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
@@ -61,5 +59,11 @@ public class CloverleafCard extends Card implements CardRule {
                 System.out.println("WIN");
             }
         }
+    }
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("no one cares yet");
+        return null;
     }
 }

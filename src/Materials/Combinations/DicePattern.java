@@ -4,6 +4,7 @@ import Materials.Dice.Dice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public enum DicePattern {
@@ -30,5 +31,27 @@ public enum DicePattern {
 
     public String toString(){
         return this.name();
+    }
+
+    public static int dicePatternSize(List<DicePattern> foundPatterns) {
+        int i = 0;
+        int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
+        int tripple1 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_ONE);
+        i = i - ((tripple1*3) + (tripple5 * 3));
+        for (DicePattern p : foundPatterns){
+            i += p.getRequiredPattern().size();
+        }
+        return i;
+    }
+
+    public static int dicePatternMaxPoints(List<DicePattern> foundPatterns) {
+        int i = 0;
+        int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
+        int tripple1 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_ONE);
+        i = i - ((tripple1*3 * DicePattern.SINGLE_ONE.getValue()) + (tripple5 * 3 * DicePattern.SINGLE_FIVE.getValue()));
+        for (DicePattern p : foundPatterns){
+            i += p.getValue();
+        }
+        return i;
     }
 }

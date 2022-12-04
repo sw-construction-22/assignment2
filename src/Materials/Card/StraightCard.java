@@ -1,5 +1,6 @@
 package Materials.Card;
 
+import Game.GameTurn;
 import Materials.Dice.Dice;
 import Player.Player;
 
@@ -19,5 +20,11 @@ public class StraightCard extends Card implements CardRule {
     @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("Execute Stop Card function");
+    }
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("no one cares yet");
+        return null;
     }
 }

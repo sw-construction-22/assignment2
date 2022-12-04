@@ -4,6 +4,7 @@ import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
+import Game.GameTurn;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class BonusCard  extends Card implements CardRule {
                         dice = player.holdBack(c.getFoundPatterns(), dice);
                     } else {
                         player.addTemporary(c.dicePatternMaxPoints());
-                        player.addScore();
+                        //player.addScore();
                         break;
                     }
                 }
@@ -59,5 +60,11 @@ public class BonusCard  extends Card implements CardRule {
                 break;
             }
         }
+    }
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("no one cares yet");
+        return null;
     }
 }

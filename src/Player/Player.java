@@ -2,9 +2,7 @@ package Player;
 
 import Game.TurnState;
 import Materials.Card.Card;
-import Materials.Card.CardType;
 import Materials.Card.Deck;
-import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
@@ -53,10 +51,8 @@ public class Player {
         this.temporary += temporary;
     }
 
-    public void addScore(){
-        score += temporary;
-        System.out.println("Your current score is the following: " + score);
-        System.out.println("------------------------------------------------------");
+    public void addScore(int scoreToAdd){
+        score += scoreToAdd;
     }
 
     public int getScore(){
@@ -110,10 +106,12 @@ public class Player {
             } catch (Exception e) {
                 System.out.println("Your entries were wrong, please enter all again in a valid format!");
             }
-            heldBack = new ArrayList<>(dice);
+
+            heldBack = new ArrayList<>(resultList);
+            /*heldBack = new ArrayList<>(dice);
             for(Dice current : resultList){
                 heldBack.remove(current);
-            }
+            }*/
         }
         return heldBack;
     }

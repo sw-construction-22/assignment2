@@ -1,5 +1,6 @@
 package Materials.Card;
 
+import Game.GameTurn;
 import Materials.Combinations.Combination;
 import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
@@ -53,10 +54,16 @@ public class FireworksCard extends Card implements CardRule {
                 }
             } else {
                 // NULL
-                player.addScore();
+                //player.addScore();
                 System.out.println("NULL");
                 break;
             }
         }
+    }
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("no one cares yet");
+        return null;
     }
 }

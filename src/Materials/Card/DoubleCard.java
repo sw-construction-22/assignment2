@@ -1,8 +1,12 @@
 package Materials.Card;
 
+import Game.GameState;
+import Game.GameTurn;
+import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoubleCard extends Card implements CardRule {
@@ -12,9 +16,54 @@ public class DoubleCard extends Card implements CardRule {
         super.cardType = cardType;
     }
 
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        System.out.println("Run turn");
+        do {
+            gameTurn.getP().roll(gameTurn.getDice());
+            List<DicePattern> patterns = evaluateRoll(gameTurn.getDice());
+            if (patterns.size() > 0) {
+                // PATTERN FOUND (VALID)
+                if (DicePattern.dicePatternSize(patterns) == gameTurn.getDice().size()) {
+                    System.out.println("Current max points from roll: " + DicePattern.dicePatternMaxPoints(patterns));
+                    System.out.println("Tutto scored");
+                    gameTurn.addPoints(DicePattern.dicePatternMaxPoints(patterns));
+                    gameTurn.setState(GameState.TUTTO);
+                    return gameTurn;
+                } else {
+                    {
+                        System.out.println("Current max points from roll: " + DicePattern.dicePatternMaxPoints(patterns));
+                        int index = 1;
+                        for (DicePattern pattern : patterns) {
+                            System.out.println(index++ + " " + pattern.toString());
+                        }
+                        if (gameTurn.getP().reroll()) {
+                            List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
+                            gameTurn.addPoints(DicePattern.dicePatternMaxPoints(evaluateRoll(diceToLayBack))); //evaluate the points for the laid back dice
+                            for(Dice current : diceToLayBack){
+                                gameTurn.setBackDie(current);
+                            }
+                            gameTurn.setState(GameState.REROLL);
+                        } else {
+                            gameTurn.addPoints(DicePattern.dicePatternMaxPoints(patterns));
+                            gameTurn.setState(GameState.END);
+                            return gameTurn;
+                        }
+                    }
+                }
+            } else {
+                // NULL
+                gameTurn.setState(GameState.NULL);
+                return gameTurn;
+            }
+        }while(gameTurn.getState().equals(GameState.REROLL));
+        return gameTurn;
+    }
+
     @Override
     public void executeRule(Player player, List<Dice> dice) {
-        System.out.println("Execute Stop Card function");
+
     }
 
     @Override

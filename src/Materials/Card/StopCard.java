@@ -1,8 +1,7 @@
 package Materials.Card;
 
-import Materials.Card.Card;
-import Materials.Card.CardRule;
-import Materials.Card.CardType;
+import Game.GameState;
+import Game.GameTurn;
 import Materials.Dice.Dice;
 import Player.Player;
 
@@ -22,5 +21,11 @@ public class StopCard extends Card implements CardRule {
     @Override
     public void executeRule(Player player, List<Dice> dice) {
         System.out.println("Execute Stop Card function");
+    }
+
+    @Override
+    public GameTurn executeTurn(GameTurn gameTurn) {
+        gameTurn.setState(GameState.NULL);
+        return gameTurn;
     }
 }
