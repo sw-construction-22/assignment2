@@ -7,6 +7,8 @@ import Materials.Card.PlusMinusCard;
 import Materials.Dice.Dice;
 import Player.Player;
 
+import javax.sound.sampled.EnumControl;
+import java.rmi.server.ExportException;
 import java.util.*;
 
 public class GameOperator {
@@ -20,7 +22,7 @@ public class GameOperator {
         deck.isEmpty();
         setGoalScore();
         // Input how many players
-        players = new ArrayList<>(Arrays.asList(new Player("Hansel"), new Player("Gretel"), new Player("Arnold")));
+        players = initializeAllPlayers();
         // sort players
         dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
 
@@ -126,6 +128,33 @@ public class GameOperator {
         }
     }
 
+    public List<Player> initializeAllPlayers(){
+        System.out.println("How many players should participate?");
+        boolean invalidInput = true;
+        int numOfPlayers = 0;
+        List<Player> gamers = new ArrayList<Player>();
+        while(invalidInput){
+            try{
+                Scanner s = new Scanner(System.in);
+                numOfPlayers = s.nextInt();
+                assert numOfPlayers >= 2 && numOfPlayers <= 4;
+                invalidInput = false;
+            } catch (Exception e ){
+                System.out.println("Enter a valid input pls");
+            }
+        }
+        for(int x = 0; x < numOfPlayers; x++){
+            gamers.add(initializeSinglePlayer());
+        }
+        return gamers;
+    }
+
+    public Player initializeSinglePlayer(){
+        System.out.println("Enter the player name");
+        Scanner s = new Scanner(System.in);
+        String name = s.nextLine();
+        return new Player(name);
+    }
     public List<Player> getAlphabetical(){
         Comparator<Player> byName = Comparator.comparing(Player::getName);
         Collections.sort(players, byName);
