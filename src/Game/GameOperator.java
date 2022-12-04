@@ -9,9 +9,9 @@ import java.util.*;
 
 public class GameOperator {
     private List<Player> players;
-    private int goalScore;
     private Deck deck;
     private List<Dice> dice;
+    private int goalScore;
     private GameState gameState = GameState.RUNNING;
     public GameOperator() {
         deck = new Deck();
@@ -22,16 +22,12 @@ public class GameOperator {
         // sort players
         dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
 
-        // this stuff should probably be in a subclass of either cards or dice or something game operator or so..
-        // start game aka turns
-        // while game state or something
-        // game turn
         getAlphabetical();
         for (Player x : players){
             System.out.println(x.getName());
         }
         while(gameState.equals(GameState.RUNNING)){
-            for (Player p : players) {
+            playerloop: for (Player p : players) {
                 GameTurn gameTurn = new GameTurn(p, dice);
                 GameState turnState = GameState.FIRSTROLL;
 
@@ -45,11 +41,11 @@ public class GameOperator {
                     System.out.println("-------------- START TURN ------------------");
                     System.out.println("Player's move: " + p.getName());
                     System.out.println("Player's score: " + p.getScore());
-                    /*while(playerTurnDecision()){ //while the user wants to see the scoreboard
+                    while(playerTurnDecision()){ //while the user wants to see the scoreboard
                         for(Player x : getScoreboard()){
                             System.out.println(x.getName() + " : " + x.getScore());
                         }
-                    }*/
+                    }
                     if(deck.isEmpty()){
                         deck.shuffle();
                     }
@@ -74,8 +70,10 @@ public class GameOperator {
                         for(int x = 0; x < gameTurn.getDrawnCards().size(); x++){
                             if (gameTurn.getDrawnCards().get(x).getState().equals(GameState.END_TUTTO)){
                                 for (Integer i : gameTurn.getDrawnCards().get(x).getScoredPoints()){
-                                    p.addScore(gameTurn.getDrawnCards().get(x).getCard().applyCardEffect(i));
+                                    p.addTemporary(i);
                                 }
+                                p.addScore(gameTurn.getDrawnCards().get(x).getCard().applyCardEffect(p.getTemporary()));
+                                p.resetTempScore();
                             }else {
                                 for (Integer i : gameTurn.getDrawnCards().get(x).getScoredPoints()){
                                     p.addScore(i);
@@ -84,33 +82,32 @@ public class GameOperator {
                         }
                         turnState = GameState.END;
                     } else if (gameTurn.getState().equals(GameState.CLOVERLEAF)){
-                        turnState = GameState.WIN;
+                        turnState = GameState.CLOVERLEAF;
+                        gameState = GameState.CLOVERLEAF;
+                        System.out.println("THE WINNER OF THE GAME IS : " + p.getName());
+                        break playerloop;
                     }  else { //NULL
                         turnState = GameState.NULL;
                     }
 
                 }
-
-                // draw a card
-                // apply the card flow => overwrite a method in the card itself
-                // create new Turn() (Object with drawCard List + temporary Score list, execution State) => state: tutto, end turn, null, cloverleaf
-                // card.executeRule(new Turn()) => return turn
-                // if(turn.getState == cloverleaf)
-                //      player.setVictory = true
-                // else if(turn.getState == tutto)
-                //       ask, go again?
-                // else if(turn.getState == end) /** attention at the game leader altering card **/
-                //       for(int x = 0; x < turn.getDrawnCard.size(); x++)
-                //          turn.getDrawnCard().get(x).applyEffect(turn.getPointsScored().get(x)) => return the points with the card
-                //          player.add returned points to score
-                // else
-                //       set turn end
-
-                //Game.Turn current = new Game.Turn(p, getGameLeader().get(0).getScore(), deck, dice);
                 System.out.println("------------------------------------------------------");
                 System.out.println("Your current score is the following: " + p.getScore());
                 System.out.println("-------------- END TURN ------------------");
 
+                if(getGameLeader().get(0).getScore() > goalScore &&
+                        p.getName() == players.get(players.size()-1).getName() &&
+                        p.getScore() == players.get(players.size()-1).getScore()){
+                    gameState = GameState.WIN;
+                    turnState = GameState.WIN;
+                    break playerloop;
+                }
+            }
+        }
+        System.out.println("GAME OVER! The required points of " + goalScore + " is reached");
+        if(getGameLeader().get(0).getScore() > goalScore){
+            for(Player x : getScoreboard()){
+                System.out.println(x.getName() + " : " + x.getScore());
             }
         }
     }

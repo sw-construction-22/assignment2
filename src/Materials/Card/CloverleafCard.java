@@ -16,7 +16,7 @@ public class CloverleafCard extends Card implements CardRule {
 
     @Override
     public int applyCardEffect(int current) {
-        return 999999999;
+        return current;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CloverleafCard extends Card implements CardRule {
                     System.out.println("Tutto scored");
                     tuttoScore += 1;
                     if (tuttoScore == 2){
-                        gameTurn.setState(GameState.WIN);
+                        gameTurn.setState(GameState.CLOVERLEAF);
                         System.out.println("WIN");
                         return gameTurn;
                     } else {

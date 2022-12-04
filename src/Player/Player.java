@@ -6,12 +6,14 @@ import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Player {
     private String name;
     private int score = 0;
+    private int temporary = 0;
 
     public Player(String name){
         this.name = name;
@@ -50,7 +52,9 @@ public class Player {
     public int getScore(){
         return score;
     }
-
+    public int getTemporary(){return temporary;}
+    public void addTemporary(int temp){temporary += temp;}
+    public void resetTempScore(){temporary = 0;}
     public boolean reroll(){
         boolean invalidInput = true;
         System.out.println("Do you want to reroll (R) or end the turn (E)?");
@@ -101,5 +105,4 @@ public class Player {
     }
 
     public String getName(){return this.name;}
-
 }
