@@ -1,9 +1,7 @@
 package Materials.Card;
 
-import Game.GameState;
-import Game.GameTurn;
-import Materials.Combinations.DicePattern;
-import Materials.Dice.Dice;
+import Player.Player;
+
 import java.util.List;
 
 public class DoubleCard extends Card implements CardRule {
@@ -17,4 +15,5 @@ public class DoubleCard extends Card implements CardRule {
     public int applyCardEffect(int current) {
         return current * 2;
     }
+
 }

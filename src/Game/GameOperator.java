@@ -1,7 +1,9 @@
 package Game;
 
 import Materials.Card.Card;
+import Materials.Card.CardType;
 import Materials.Card.Deck;
+import Materials.Card.PlusMinusCard;
 import Materials.Dice.Dice;
 import Player.Player;
 
@@ -72,7 +74,19 @@ public class GameOperator {
                                 for (Integer i : gameTurn.getDrawnCards().get(x).getScoredPoints()){
                                     p.addTemporary(i);
                                 }
-                                p.addScore(gameTurn.getDrawnCards().get(x).getCard().applyCardEffect(p.getTemporary()));
+                                if (gameTurn.getDrawnCards().get(x).getCard().getCardType() == CardType.PLUSMINUS) {
+                                    PlusMinusCard q = (PlusMinusCard) gameTurn.getDrawnCards().get(x).getCard();
+                                    List<Player> subtractors = q.applyCardEffect(p.getTemporary(), getGameLeader(), p);
+                                    for (Player r : players) {
+                                        for (Player s : subtractors) {
+                                            if (s.getScore() == r.getScore() && s.getName() == r.getName()){
+                                                r.setScore(s.getScore());
+                                        }
+                                    }
+                                }
+                                } else {
+                                    p.addScore(gameTurn.getDrawnCards().get(x).getCard().applyCardEffect(p.getTemporary()));
+                                }
                                 p.resetTempScore();
                             }else {
                                 for (Integer i : gameTurn.getDrawnCards().get(x).getScoredPoints()){

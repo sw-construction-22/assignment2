@@ -11,23 +11,23 @@ public class CardFactory {
          } else if (cardType.equals(CardType.CLOVERLEAF)){
              return new CloverleafCard(cardType);
          } else if (cardType.equals(CardType.BONUSx200)){
-             return new BonusCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.BONUSx300)){
-             return new BonusCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.BONUSx400)){
-              return new BonusCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.BONUSx500)){
-              return new BonusCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.BONUSx600)){
-              return new BonusCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.X2)){
-              return new DoubleCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.PLUSMINUS)){
               return new PlusMinusCard(cardType);
          } else if (cardType.equals(CardType.FIREWORKS)){
-              return new FireworksCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          } else if (cardType.equals(CardType.STRAIGHT)){
-              return new StraightCard(cardType);
+             return new PlusMinusCard(CardType.PLUSMINUS);
          }
         return null;
     }

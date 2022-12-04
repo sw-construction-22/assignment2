@@ -52,6 +52,9 @@ public class Player {
     public int getScore(){
         return score;
     }
+    public void setScore(int score){
+        score = score;
+    }
     public int getTemporary(){return temporary;}
     public void addTemporary(int temp){temporary += temp;}
     public void resetTempScore(){temporary = 0;}

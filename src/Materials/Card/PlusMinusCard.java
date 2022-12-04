@@ -22,4 +22,13 @@ public class PlusMinusCard extends Card implements CardRule {
         return current+1000;
     }
 
+    public List<Player> applyCardEffect(int current, List<Player> players, Player you) {
+        for(Player p : players){
+            if(p.getName() != you.getName() && you.getScore() != p.getScore()){
+                p.addScore(-1000);
+            }
+        }
+        applyCardEffect(current);
+        return players;
+    }
 }
