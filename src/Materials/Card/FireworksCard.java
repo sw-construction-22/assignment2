@@ -66,9 +66,8 @@ public class FireworksCard extends Card implements CardRule {
             List<DicePattern> patterns = evaluateRoll(gameTurn.getDice());
             if (patterns.size() > 0) {
                 // PATTERN FOUND (VALID)
-
                 //add points for all valid patterns => no new draw card
-                if (DicePattern.dicePatternSize(patterns) == gameTurn.getDice().size()) {
+                if (DicePattern.dicePatternSizeFireworks(patterns) == gameTurn.getDice().size()) {
                     System.out.println("Tutto scored");
                     gameTurn.setDice(new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice())));
                 } else {

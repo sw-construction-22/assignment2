@@ -50,6 +50,9 @@ public class GameOperator {
                             System.out.println(x.getName() + " : " + x.getScore());
                         }
                     }*/
+                    if(deck.isEmpty()){
+                        deck.shuffle();
+                    }
                     Card c = p.draw(deck);
                     System.out.println("Drawn Card: " + c.getCardType());
                     gameTurn.addCard(c);

@@ -65,4 +65,12 @@ public enum DicePattern {
         }
         return i;
     }
+
+    public static int dicePatternSizeFireworks(List<DicePattern> foundPatterns) {
+        int i = 0;
+        for (DicePattern p : foundPatterns){
+            i += p.getRequiredPattern().size();
+        }
+        return i;
+    }
 }
