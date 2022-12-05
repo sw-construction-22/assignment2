@@ -18,7 +18,7 @@ public class StraightCard extends Card implements CardRule {
         super.cardType = cardType;
     }
 
-    protected List<DicePattern> evaluateRoll(List<Dice> thrownDices, List<DicePattern> heldBackPats){
+    public List<DicePattern> evaluateRoll(List<Dice> thrownDices, List<DicePattern> heldBackPats){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6 && cardType != null;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
         List<DicePattern> foundPatterns = new ArrayList<>();

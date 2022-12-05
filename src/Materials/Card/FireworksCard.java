@@ -24,7 +24,7 @@ public class FireworksCard extends Card implements CardRule {
         return current;
     }
 
-    protected List<DicePattern> evaluateRoll(List<Dice> thrownDices){
+    public List<DicePattern> evaluateRoll(List<Dice> thrownDices){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6 && cardType != null;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
         List<DicePattern> foundPatterns = new ArrayList<>();
