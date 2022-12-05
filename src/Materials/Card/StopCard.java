@@ -2,11 +2,9 @@ package Materials.Card;
 
 import Game.GameState;
 import Game.GameTurn;
-import Materials.Dice.Dice;
-import Player.Player;
-
-import java.util.List;
-
+/**
+ * author: daniel lutziger
+ */
 public class StopCard extends Card implements CardRule {
 
     protected StopCard(CardType cardType){

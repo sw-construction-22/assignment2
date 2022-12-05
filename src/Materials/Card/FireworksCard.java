@@ -58,11 +58,7 @@ public class FireworksCard extends Card implements CardRule {
     public GameTurn executeTurn(GameTurn gameTurn) {
         System.out.println("Run turn");
         do {
-            if(gameTurn.getDice().size()== 0){
-                System.out.println("asdf");
-            } else{
-                gameTurn.getP().roll(gameTurn.getDice());
-            }
+            gameTurn.getP().roll(gameTurn.getDice());
             List<DicePattern> patterns = evaluateRoll(gameTurn.getDice());
             if (patterns.size() > 0) {
                 // PATTERN FOUND (VALID)

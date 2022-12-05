@@ -1,9 +1,8 @@
 package Materials.Card;
 
-import Player.Player;
-
-import java.util.List;
-
+/**
+ * author: daniel lutziger
+ */
 public class DoubleCard extends Card implements CardRule {
 
     protected DoubleCard(CardType cardType){

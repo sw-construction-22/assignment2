@@ -1,13 +1,15 @@
 package Game;
 
 import Materials.Card.Card;
-import Materials.Combinations.DicePattern;
 import Materials.Dice.Dice;
 import Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * author daniel lutziger
+ */
 public class GameTurn {
     private Player p;
     private List<Dice> dice;

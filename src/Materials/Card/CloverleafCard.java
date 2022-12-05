@@ -9,7 +9,9 @@ import Materials.Dice.Dice;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * author: daniel lutziger
+ */
 public class CloverleafCard extends Card implements CardRule {
 
     protected CloverleafCard(CardType cardType) {assert cardType != null; super.cardType = cardType;}

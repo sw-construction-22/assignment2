@@ -1,5 +1,7 @@
 package Materials.Card;
-
+/**
+ * author: daniel lutziger
+ */
 public enum CardType {
     BONUSx200(5, 200),
     BONUSx300(5, 300),

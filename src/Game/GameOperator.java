@@ -7,10 +7,11 @@ import Materials.Card.PlusMinusCard;
 import Materials.Dice.Dice;
 import Player.Player;
 
-import javax.sound.sampled.EnumControl;
-import java.rmi.server.ExportException;
 import java.util.*;
-
+/**
+ * author: daniel lutziger
+ * - marked point cooperation with orestis bollano
+ */
 public class GameOperator {
     private List<Player> players;
     private Deck deck;
@@ -135,8 +136,7 @@ public class GameOperator {
         List<Player> gamers = new ArrayList<Player>();
         while(invalidInput){
             try{
-                Scanner s = new Scanner(System.in);
-                numOfPlayers = s.nextInt();
+                numOfPlayers = getScoreInput();
                 assert numOfPlayers >= 2 && numOfPlayers <= 4;
                 invalidInput = false;
             } catch (Exception e){
@@ -153,8 +153,7 @@ public class GameOperator {
 
     public Player initializeSinglePlayer(){
         System.out.println("Enter the player name");
-        Scanner s = new Scanner(System.in);
-        String name = s.nextLine();
+        String name = getInput();
         return new Player(name);
     }
     public List<Player> getAlphabetical(){
@@ -188,8 +187,7 @@ public class GameOperator {
         boolean invalidInput = true;
         while(invalidInput){
             try {
-                Scanner scanner = new Scanner(System.in);
-                goalScore = scanner.nextInt();
+                goalScore = getScoreInput();
                 invalidInput = false;
             } catch (Exception e) {
                 System.out.println("Your entries were wrong, please enter again in a valid format!");
@@ -197,13 +195,15 @@ public class GameOperator {
         }
     }
 
+    /**
+     * author: daniel lutziger in pair programming cooperation with orestis bollano
+     */
     public boolean playerTurnDecision(){
         System.out.println("Do you want to start your roll (R) or see the scoreboard (S)?");
         boolean invalidInput = true;
         while(invalidInput){
             try {
-                Scanner scanner = new Scanner(System.in);
-                String nL = scanner.nextLine();
+                String nL = getInput();
                 assert nL.length() == 1;
                 char decision = nL.charAt(0);
                 if (decision == 'R' || decision == 'r'){
@@ -220,5 +220,21 @@ public class GameOperator {
             }
         }
         return false;
+    }
+
+    public String getInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+    public int getScoreInput(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
+
+    public List<Player> getPlayers(){
+        return players;
+    }
+    public void setPlayers(List<Player> players){
+        this.players = players;
     }
 }

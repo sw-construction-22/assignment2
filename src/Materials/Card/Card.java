@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * author: daniel lutziger
+ */
 public abstract class Card implements CardRule {
     protected static final Card[] CARDS = new Card[CardType.values().length];
     protected CardType cardType;

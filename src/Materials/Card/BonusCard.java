@@ -1,6 +1,8 @@
 package Materials.Card;
 
-
+/**
+ * author: daniel lutziger
+ */
 public class BonusCard  extends Card implements CardRule {
 
     protected BonusCard(CardType cardType){

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Represents a deck of playing cards that can be inherited.
+ * author: daniel lutziger
  */
 public class Deck implements Iterable<Card> {
     private List<Card> cards = new ArrayList<>();

@@ -2,6 +2,7 @@ package Materials.Card;
 
 /**
  * Factory design pattern
+ * author: daniel lutziger
  */
 public class CardFactory {
     public Card getCard(CardType cardType) {

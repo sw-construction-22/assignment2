@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * author: daniel lutziger
+ */
 public class Player {
     private String name;
     private int score = 0;
@@ -53,7 +55,7 @@ public class Player {
         return score;
     }
     public void setScore(int score){
-        score = score;
+        this.score = score;
     }
     public int getTemporary(){return temporary;}
     public void addTemporary(int temp){temporary += temp;}
@@ -63,8 +65,7 @@ public class Player {
         System.out.println("Do you want to reroll (R) or end the turn (E)?");
         while(invalidInput){
             try {
-                Scanner scanner = new Scanner(System.in);
-                String nL = scanner.nextLine();
+                String nL = getInput();
                 assert nL.length() == 1;
                 char decision = nL.charAt(0);
                 if (decision == 'R' || decision == 'r'){
@@ -91,8 +92,7 @@ public class Player {
         while(invalidInput){
             List<Dice> resultList = new ArrayList<>();
             try {
-                Scanner scanner = new Scanner(System.in);
-                String[] inputs = scanner.nextLine().split(",");
+                String[] inputs = getInput().split(",");
                 assert inputs.length > 0;
                 for(int x = 0; x < inputs.length; x++){
                     resultList.addAll(patterns.get(Integer.parseInt(inputs[x])-1).getRequiredPattern()); //input = 1, index is 0
@@ -108,4 +108,8 @@ public class Player {
     }
 
     public String getName(){return this.name;}
+    public String getInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
 }
