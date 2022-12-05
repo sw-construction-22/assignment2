@@ -19,6 +19,10 @@ public class GameOperator {
     private int goalScore;
     private GameState gameState = GameState.RUNNING;
     public GameOperator() {
+        initializeGame();
+    }
+
+    public void initializeGame(){
         deck = new Deck();
         deck.isEmpty();
         setGoalScore();
@@ -26,7 +30,6 @@ public class GameOperator {
         players = initializeAllPlayers();
         // sort players
         dice = new ArrayList<>(Arrays.asList(new Dice(), new Dice(), new Dice(), new Dice(), new Dice(), new Dice()));
-
         getAlphabetical();
         for (Player x : players){
             System.out.println(x.getName());

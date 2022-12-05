@@ -159,9 +159,6 @@ public class GameOperatorTest {
     @Test
     public void testGameOperatorPlayTurn(){
         GameOperator mocked = mock(GameOperator.class);
-        Player playerMock = mock(Player.class);
-        //when(mocked.getScoreInput()).thenReturn(4);
-        //when(mocked.initializeAllPlayers()).thenReturn(new ArrayList(Arrays.asList(new Player("Beni"), new Player("Gerti"), new Player("Gunther"), new Player("Trudi"))));
         Mockito.doCallRealMethod().when(mocked).playGame();
         Mockito.doCallRealMethod().when(mocked).setGameState(GameState.RUNNING);
         mocked.setGameState(GameState.RUNNING);
@@ -187,8 +184,6 @@ public class GameOperatorTest {
         Deck d = new Deck(CardType.FIREWORKS);
         Mockito.doCallRealMethod().when(mocked).setDeck(d);
         mocked.setDeck(d);
-        //Mockito.doCallRealMethod().when(mocked).setPlayers(Arrays.asList(new Player("Beni"), new Player("Gerti"), new Player("Gunther"), new Player("Trudi")));
-        //mocked.setPlayers(new ArrayList(Arrays.asList(new Player("Beni"), new Player("Gerti"), new Player("Gunther"), new Player("Trudi"))));
         mocked.playGame();
         assertEquals(GameState.WIN, mocked.getGameState());
     }
@@ -201,5 +196,32 @@ public class GameOperatorTest {
         gt.addCard(x.draw());
         gt.tuttoScored();
         assertEquals(GameState.TUTTO, gt.getState());
+    }
+
+    @Test
+    public void testGameOperatorConstructor(){
+        GameOperator mocked = mock(GameOperator.class);
+        Mockito.doCallRealMethod().when(mocked).initializeGame();
+        String[] names = {"Gerti", "Trudi", "Gunther", "Beni"};
+        when(mocked.initializeSinglePlayer()).thenCallRealMethod();
+        when(mocked.getPlayers()).thenCallRealMethod();
+        when(mocked.getAlphabetical()).thenCallRealMethod();
+        when(mocked.getGameLeader()).thenCallRealMethod();
+        when(mocked.getScoreboard()).thenCallRealMethod();
+        when(mocked.getGameState()).thenCallRealMethod();
+        List<Player> players = new ArrayList();
+        for(String name : names){
+            when(mocked.getInput()).thenReturn(name);
+            players.add(mocked.initializeSinglePlayer());
+        }
+        when(mocked.initializeAllPlayers()).thenReturn(players);
+        Mockito.doCallRealMethod().when(mocked).setPlayers(players);
+        mocked.setPlayers(players);
+        mocked.initializeGame();
+        ArrayList<String> e = new ArrayList();
+        for(Player p : mocked.getAlphabetical()){
+            e.add(p.getName());
+        }
+        assertEquals(new ArrayList(Arrays.asList("Beni", "Gerti", "Gunther", "Trudi")), e);
     }
 }
