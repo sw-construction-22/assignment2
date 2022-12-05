@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 /**
  * author: daniel lutziger
+ * representation of the cloverleaf card
  */
 public class CloverleafCard extends Card implements CardRule {
 
@@ -21,6 +22,11 @@ public class CloverleafCard extends Card implements CardRule {
         return current;
     }
 
+    /**
+     * The method has to be overridden as this card does not allow the user to end the turn
+     * @param gameTurn the game turn the user currently has
+     * @return the new game turn, either with a NULL or CLOVERLEAF game state
+     */
     @Override
     public GameTurn executeTurn(GameTurn gameTurn) {
         int tuttoScore = 0;
@@ -42,17 +48,16 @@ public class CloverleafCard extends Card implements CardRule {
                     }
 
                 } else {
-                    {
-                        int index = 1;
-                        for (DicePattern pattern : patterns) {
-                            System.out.println(index++ + " " + pattern.toString());
-                        }
-                        List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
-                        for(Dice current : diceToLayBack){
-                            gameTurn.setBackDie(current);
-                        }
-                        gameTurn.setState(GameState.REROLL);
+                    // user can hold back dice but not end the turn
+                    int index = 1;
+                    for (DicePattern pattern : patterns) {
+                        System.out.println(index++ + " " + pattern.toString());
                     }
+                    List<Dice> diceToLayBack = gameTurn.getP().holdBack(patterns, gameTurn.getDice());
+                    for(Dice current : diceToLayBack){
+                        gameTurn.setBackDie(current);
+                    }
+                    gameTurn.setState(GameState.REROLL);
                 }
             } else {
                 // NULL

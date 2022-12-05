@@ -1,5 +1,8 @@
 package Materials.Dice;
 
+/**
+ * dice representation
+ */
 public class Dice implements Comparable{
     private final int MAX = 6;
 

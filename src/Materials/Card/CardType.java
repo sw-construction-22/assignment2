@@ -1,6 +1,7 @@
 package Materials.Card;
 /**
  * author: daniel lutziger
+ * every card type consists of the number of cards as well as the points that should be provided with it
  */
 public enum CardType {
     BONUSx200(5, 200),
@@ -8,11 +9,11 @@ public enum CardType {
     BONUSx400(5, 400),
     BONUSx500(5, 500),
     BONUSx600(5, 600),
-    STRAIGHT(5,  0),
+    STRAIGHT(5,  2000),
     CLOVERLEAF(1, 0),
     FIREWORKS(5,  0),
     STOP(10,  0),
-    PLUSMINUS(5,  0),
+    PLUSMINUS(5,  1000),
     X2(5,  0);
 
     private final int numberOfCards;

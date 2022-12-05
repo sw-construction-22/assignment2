@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 /**
  * author: Daniel Lutziger
+ * representation of a fireworks card
  */
 public class FireworksCard extends Card implements CardRule {
 
@@ -24,6 +25,14 @@ public class FireworksCard extends Card implements CardRule {
         return current;
     }
 
+    /**
+     * as every pattern has to be taken in the fireworks card (aka laid back)
+     * the card only returns the best patterns (this is especially the case in the Tripple 1 | 5)
+     * => hence the method (inner loop) has to be overridden
+     *
+     * @param thrownDices the list of the dice the user has thrown
+     * @return best pattern for the user
+     */
     public List<DicePattern> evaluateRoll(List<Dice> thrownDices){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6 && cardType != null;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
@@ -54,6 +63,16 @@ public class FireworksCard extends Card implements CardRule {
         }
         return foundPatterns;
     }
+
+    /**
+     * user has to roll endlessly until null is scored
+     * every dice pattern has to be laid back
+     * everything will be added at the end
+     * user cannot draw a new card
+     *
+      * @param gameTurn the game turn the user currently has
+     * @return game turn for the user with the game state end
+     */
     @Override
     public GameTurn executeTurn(GameTurn gameTurn) {
         System.out.println("Run turn");

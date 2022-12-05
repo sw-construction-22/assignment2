@@ -4,6 +4,7 @@ import Game.GameState;
 import Game.GameTurn;
 /**
  * author: daniel lutziger
+ * representation of the stop card
  */
 public class StopCard extends Card implements CardRule {
 

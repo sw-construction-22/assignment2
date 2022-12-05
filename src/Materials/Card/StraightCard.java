@@ -20,6 +20,13 @@ public class StraightCard extends Card implements CardRule {
         super.cardType = cardType;
     }
 
+    /**
+     * override the straight patttern validation
+     * 1-6 are valid but only once
+     * @param thrownDices the dice thrown
+     * @param heldBackPats the dice which were already held back
+     * @return the possible patterns for the user to hold back
+     */
     public List<DicePattern> evaluateRoll(List<Dice> thrownDices, List<DicePattern> heldBackPats){
         assert thrownDices.size() > 0 && thrownDices.size() <= 6 && cardType != null;
         List<Dice> thrownDiceCopy = new ArrayList<>(thrownDices);
@@ -50,6 +57,11 @@ public class StraightCard extends Card implements CardRule {
         return current + 2000;
     }
 
+    /**
+     *
+     * @param gameTurn the game turn the user currently has
+     * @return the turn with either a tutto or a null
+     */
     @Override
     public GameTurn executeTurn(GameTurn gameTurn) {
         System.out.println("Run turn");

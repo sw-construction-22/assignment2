@@ -9,6 +9,9 @@ import java.util.List;
 
 /**
  * author daniel lutziger
+ * the goal of this class is to represent a turn a user has and keep track of it
+ * - multiple cards can be drawn
+ * - multiple scores can be scored with a card
  */
 public class GameTurn {
     private Player p;

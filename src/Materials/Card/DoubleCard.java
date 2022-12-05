@@ -2,6 +2,7 @@ package Materials.Card;
 
 /**
  * author: daniel lutziger
+ * representation of a double card
  */
 public class DoubleCard extends Card implements CardRule {
 

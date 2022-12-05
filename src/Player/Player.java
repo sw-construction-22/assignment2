@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 /**
  * author: daniel lutziger
+ * player representation
  */
 public class Player {
     private String name;
@@ -60,6 +61,11 @@ public class Player {
     public int getTemporary(){return temporary;}
     public void addTemporary(int temp){temporary += temp;}
     public void resetTempScore(){temporary = 0;}
+
+    /**
+     * ask whether the user wants to end his turn
+     * @return whether the user wants to reroll or end his turn
+     */
     public boolean reroll(){
         boolean invalidInput = true;
         System.out.println("Do you want to reroll (R) or end the turn (E)?");
@@ -84,6 +90,12 @@ public class Player {
         return false;
     }
 
+    /**
+     * method for the user to hold back his dice
+     * @param patterns the patterns the user has scored with his dice throw
+     * @param dice the dice the uer has
+     * @return the dice the user wants to hold back
+     */
     public List<Dice> holdBack(List<DicePattern> patterns, List<Dice> dice){
         assert !dice.isEmpty();
         List<Dice> heldBack = new ArrayList<>();
@@ -108,6 +120,11 @@ public class Player {
     }
 
     public String getName(){return this.name;}
+
+    /**
+     * abstraction of the player input
+     * @return the scanner input
+     */
     public String getInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

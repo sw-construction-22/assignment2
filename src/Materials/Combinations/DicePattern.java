@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * author: daniel lutziger
+ * representation of the patterns the dice can have
+ */
 public enum DicePattern {
     TRIPPLE_ONE(new ArrayList<>(Arrays.asList(new Dice(1), new Dice(1), new Dice(1))), 1000),
     TRIPPLE_TWO(new ArrayList<>(Arrays.asList(new Dice(2), new Dice(2), new Dice(2))), 200),
@@ -37,6 +41,10 @@ public enum DicePattern {
         return this.name();
     }
 
+    /**
+     * @param foundPatterns
+     * @return the amount of the dice pattern
+     */
     public static int dicePatternSize(List<DicePattern> foundPatterns) {
         int i = 0;
         int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
@@ -48,6 +56,10 @@ public enum DicePattern {
         return i;
     }
 
+    /**
+     * @param foundPatterns
+     * @return the max points of the dice pattern
+     */
     public static int dicePatternMaxPoints(List<DicePattern> foundPatterns) {
         int i = 0;
         int tripple5 = Collections.frequency(foundPatterns, DicePattern.TRIPPLE_FIVE);
@@ -58,6 +70,10 @@ public enum DicePattern {
         }
         return i;
     }
+    /**
+     * @param foundPatterns
+     * @return the max points of the dice pattern for the fireworks card
+     */
     public static int dicePatternMaxPointsFireworks(List<DicePattern> foundPatterns) {
         int i = 0;
         for (DicePattern p : foundPatterns){
@@ -66,6 +82,10 @@ public enum DicePattern {
         return i;
     }
 
+    /**
+     * @param foundPatterns
+     * @return the amount of the dice for the fireworks card
+     */
     public static int dicePatternSizeFireworks(List<DicePattern> foundPatterns) {
         int i = 0;
         for (DicePattern p : foundPatterns){
