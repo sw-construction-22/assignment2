@@ -26,9 +26,6 @@ public class CardPointsScore {
         return card;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
-    }
 
     public GameState getState() {
         return state;

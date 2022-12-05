@@ -2,6 +2,7 @@ import Game.GameOperator;
 
 public class Main {
     public static void main(String[] args){
-        new GameOperator();
+        GameOperator game = new GameOperator();
+        game.playGame();
     }
 }

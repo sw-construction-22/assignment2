@@ -31,14 +31,13 @@ public class GameOperator {
         for (Player x : players){
             System.out.println(x.getName());
         }
+    }
+    public void playGame(){
         while(gameState.equals(GameState.RUNNING)){
             playerloop: for (Player p : players) {
                 GameTurn gameTurn = new GameTurn(p, dice);
                 GameState turnState = GameState.FIRSTROLL;
 
-                /**
-                 * Check if the state is not over and execute the stuff ! TODO
-                 */
                 while(!turnState.equals(GameState.CLOVERLEAF) &&
                         !turnState.equals(GameState.WIN) &&
                         !turnState.equals(GameState.END) &&
@@ -66,6 +65,7 @@ public class GameOperator {
                         if (p.reroll()) {
                             //set all 6 dice again
                             gameTurn.setDice(dice);
+                            gameTurn.setState(GameState.REROLL_TUTTO);
                         } else {
                             //set state to end
                             gameTurn.setState(GameState.END_TUTTO);
@@ -73,7 +73,7 @@ public class GameOperator {
                     }
                     if (gameTurn.getState().equals(GameState.END) || gameTurn.getState().equals(GameState.END_TUTTO)){
                         for(int x = 0; x < gameTurn.getDrawnCards().size(); x++){
-                            if (gameTurn.getDrawnCards().get(x).getState().equals(GameState.END_TUTTO)){
+                            if (gameTurn.getDrawnCards().get(x).getState().equals(GameState.END_TUTTO) || gameTurn.getDrawnCards().get(x).getState().equals(GameState.REROLL_TUTTO)){
                                 for (Integer i : gameTurn.getDrawnCards().get(x).getScoredPoints()){
                                     p.addTemporary(i);
                                 }
@@ -84,9 +84,9 @@ public class GameOperator {
                                         for (Player s : subtractors) {
                                             if (s.getScore() == r.getScore() && s.getName() == r.getName()){
                                                 r.setScore(s.getScore());
+                                            }
                                         }
                                     }
-                                }
                                 } else {
                                     p.addScore(gameTurn.getDrawnCards().get(x).getCard().applyCardEffect(p.getTemporary()));
                                 }
@@ -103,7 +103,7 @@ public class GameOperator {
                         gameState = GameState.CLOVERLEAF;
                         System.out.println("THE WINNER OF THE GAME IS : " + p.getName());
                         break playerloop;
-                    }  else { //NULL
+                    }  else if (gameTurn.getState().equals(GameState.NULL)){ //NULL
                         turnState = GameState.NULL;
                     }
 
@@ -128,7 +128,6 @@ public class GameOperator {
             }
         }
     }
-
     public List<Player> initializeAllPlayers(){
         System.out.println("How many players should participate?");
         boolean invalidInput = true;
@@ -236,5 +235,26 @@ public class GameOperator {
     }
     public void setPlayers(List<Player> players){
         this.players = players;
+    }
+    public int getGoalsScore(){
+        return goalScore;
+    }
+    public GameState getGameState(){
+        return this.gameState;
+    }
+    public void setGameState(GameState gs){
+        this.gameState = gs;
+    }
+
+    public List<Dice> getDice() {
+        return dice;
+    }
+
+    public void setDice(List<Dice> dice) {
+        this.dice = dice;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 }
